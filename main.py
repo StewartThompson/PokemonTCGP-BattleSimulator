@@ -35,15 +35,21 @@ sandlash_deck = [
 j1.set_deck(pikachu_deck)
 j2.set_deck(sandlash_deck)
 
-m = match.Match(j1, j2)
-result = m.start_battle()
-if result == j1:
-    result = "j1"
-elif result == j2:
-    result = "j2"
-if result in results:
-    results[result] += 1
-else:
-    results[result] = 1
-print(i, results)
-i+=1
+for i in range(1000):
+    print(i)
+    m = match.Match(j1, j2)
+    try:
+        result = m.start_battle()
+    except KeyboardInterrupt as e:
+        print(m.turn, m.player1.active_pokemon.equipped_energies, m.player2)
+        raise e
+    if result == j1:
+        result = "j1"
+    elif result == j2:
+        result = "j2"
+    if result in results:
+        results[result] += 1
+    else:
+        results[result] = 1
+    print(m.turn)
+print(results)

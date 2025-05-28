@@ -1,19 +1,20 @@
+from agents.agent import Agent
 from moteur.cartes.item import Item
 from moteur.cartes.pokemon import Pokemon
 import random
-
+from agents import random_agent
 from moteur.cartes.trainer import Trainer
 
 dragon_type_energies = ["water", "electric"]
 class Player:
-    def __init__(self, name, deck=None, chosen_energies=None):
+    def __init__(self, name, deck=None, chosen_energies=None, agent=None):
         self.name = name
         self.deck = [] if not deck else deck
         self.points = 0
         self.remaining_cards = list(self.deck)
         self.discard_pile = []
         self.cards_in_hand = []
-        self.active_pokemon = None
+        self.active_pokemon: Pokemon = None
         self.bench_pokemons = []
         if chosen_energies:
             self.chosen_energies = chosen_energies
@@ -21,6 +22,7 @@ class Player:
             self.chosen_energies = []
 
         self.energy_pile = []
+        self.agent: Agent = agent if agent else random_agent.RandomAgent()
     def reset_deck(self):
         deck_reset = []
         for card in self.deck:
