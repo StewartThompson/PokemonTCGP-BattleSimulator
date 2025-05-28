@@ -1,0 +1,15 @@
+ID,Name,Description,amount,effect type,special values
+1,Powder Heal,"Once during your turn, you may heal 20 damage from each of your pokemon",once,heal_all,20
+2,Fragrance Trap,"If this Pokemon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokemon to the Active Spot",once,switch_active,enemy|self
+3,Counterattack,"If this Pokemon is in the Active Spot and is damaged by an attack from your opponent's Pokemon, do 20 damage to the Attacking Pokemon",attacked,thorns,20
+4,Shell Armor,This Pokemon takes -10 damage from attacks.,attacked,shield,10
+5,Water Shuriken,"Once during your turn, you may do 20 damage to 1 of your opponent's Pokemon.",once,damage_enemy,any|20
+6,Volt Charge,"Once during your turn, you may take a Electric Energy from your Energy Zone and attach it to this Pokemon.",once,gain_energy,self|electric|any|1
+7,Shadowy Spellbind,"As long as this Pokemon in the Active Spot, your opponent can't use any Supporter cards from their hand.",during_enemy_turn,block_supporter,
+8,Sleep Pendulum,"Once during your turn, you may flip a coin. If heads, your opponent's Active Pokemon is now Asleep.",once,sleep,1|exact
+9,Psy Shadow,"Once during your turn, you may take a Psychic Energy from your Energy Zone and attach it to the Psychic Pokemon in the Active Spot.",once,gain_energy,active|psychic|psychic|1
+10,Gas Leak,"Once during your turn, if this Pokemon is in the Active Spot, you may make your opponent's Active Pokemon Poisoned.",once,poison,10|active|active
+11,Hard Coat,This Pokemon takes -20 damage from attacks.,attacked,shield,20
+12,Drive Off,"Once during your turn, you may switch out your opponent's Active Pokemon to the Bench. (Your opponent chooses the new Active Pokemon.)",once,switch_active,enemy|opponent
+13,Data Scan,"Once during your turn, you may look at the top of your deck.",once,look_at_deck,top|1
+14,Self Removal,"Discard this card.",once,self_discard,
