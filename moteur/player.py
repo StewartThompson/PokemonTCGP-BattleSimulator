@@ -12,7 +12,6 @@ class Player:
         self.deck = [] if not deck else deck
         self.points = 0
         self.remaining_cards = list(self.deck)
-        self.discard_pile = []
         self.cards_in_hand = []
         self.active_pokemon: Pokemon = None
         self.bench_pokemons = []
@@ -22,7 +21,7 @@ class Player:
             self.chosen_energies = []
 
         self.energy_pile = []
-        self.agent: Agent = agent if agent else random_agent.RandomAgent()
+        self.agent: Agent = agent(self) if agent else random_agent.RandomAgent(self)
     def reset_deck(self):
         deck_reset = []
         for card in self.deck:
@@ -47,14 +46,14 @@ class Player:
 
     def set_deck(self, deck):
         self.deck = deck
-        if not self.chosen_energies:
-            for card in self.deck:
-                if type(card) is Pokemon and card.pokemon_type != "normal":
-                    if card.pokemon_type == "dragon":
-                        for energy in dragon_type_energies:
-                            self.chosen_energies.append(energy)
-                    else:
-                        self.chosen_energies.append(card.pokemon_type)
+        self.chosen_energies = []
+        for card in self.deck:
+            if type(card) is Pokemon and card.pokemon_type != "normal":
+                if card.pokemon_type == "dragon":
+                    for energy in dragon_type_energies:
+                        self.chosen_energies.append(energy)
+                else:
+                    self.chosen_energies.append(card.pokemon_type)
         self.chosen_energies = list(set(self.chosen_energies))
 
     def reset(self):
@@ -62,12 +61,11 @@ class Player:
         self.points = 0
         self.remaining_cards = list(self.deck)
         random.shuffle(self.remaining_cards)
-        self.discard_pile = []
         self.cards_in_hand = []
         self.active_pokemon = None
         self.bench_pokemons = []
         self.energy_pile = []
-        for i in range(100):
+        for i in range(1000):
             self.energy_pile.append(random.choice(self.chosen_energies))
 
     def draw(self, n):

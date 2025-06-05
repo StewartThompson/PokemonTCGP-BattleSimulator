@@ -23,6 +23,7 @@ class Match:
             raise ValueError("Deck 1 must have 20 cards")
         if not len(self.player2.deck) == 20:
             raise ValueError("Deck 2 must have 20 cards")
+
         self.player1.reset()
         self.player2.reset()
 
@@ -32,15 +33,15 @@ class Match:
         self.player1.draw(4)
 
         basic_pokemons = get_basic_pokemons(self.player1.cards_in_hand)
-        self.player1.active_pokemon = self.player1.agent.get_chosen_card(basic_pokemons, self)
+        self.player1.active_pokemon = self.player1.agent.get_chosen_card(basic_pokemons, self, "chose_first_active")
         basic_pokemons.remove(self.player1.active_pokemon)
         self.player1.cards_in_hand.remove(self.player1.active_pokemon)
-        new_bench_pokemon = self.player1.agent.get_chosen_card(basic_pokemons + [None], self)
+        new_bench_pokemon = self.player1.agent.get_chosen_card(basic_pokemons + [None], self, "chose_first_basic")
         while new_bench_pokemon is not None and len(self.player1.bench_pokemons) < 3:
             self.player1.bench_pokemons.append(new_bench_pokemon)
             basic_pokemons.remove(new_bench_pokemon)
             self.player1.cards_in_hand.remove(new_bench_pokemon)
-            new_bench_pokemon = self.player1.agent.get_chosen_card(basic_pokemons + [None], self)
+            new_bench_pokemon = self.player1.agent.get_chosen_card(basic_pokemons + [None], self, "chose_first_basic")
 
         random_player2_basic_pokemon = random.choice(get_basic_pokemons(self.player2.remaining_cards))
         self.player2.cards_in_hand.append(random_player2_basic_pokemon)
@@ -48,19 +49,20 @@ class Match:
         self.player2.draw(4)
 
         basic_pokemons = get_basic_pokemons(self.player2.cards_in_hand)
-        self.player2.active_pokemon = self.player2.agent.get_chosen_card(basic_pokemons, self)
+        self.player2.active_pokemon = self.player2.agent.get_chosen_card(basic_pokemons, self, "chose_first_active")
         basic_pokemons.remove(self.player2.active_pokemon)
         self.player2.cards_in_hand.remove(self.player2.active_pokemon)
-        new_bench_pokemon = self.player2.agent.get_chosen_card(basic_pokemons + [None], self)
+        new_bench_pokemon = self.player2.agent.get_chosen_card(basic_pokemons + [None], self, "chose_first_basic")
         while new_bench_pokemon is not None and len(self.player2.bench_pokemons) < 3:
             self.player2.bench_pokemons.append(new_bench_pokemon)
             basic_pokemons.remove(new_bench_pokemon)
             self.player2.cards_in_hand.remove(new_bench_pokemon)
-            new_bench_pokemon = self.player2.agent.get_chosen_card(basic_pokemons + [None], self)
+            new_bench_pokemon = self.player2.agent.get_chosen_card(basic_pokemons + [None], self, "chose_first_basic")
 
-        attack_prevention = (False, None)
+        self.current_player = random.choice([1, 2])
+        self.attack_prevention = (False, None)
         supporter_prevention = (False, None)
-        retreat_prevention = (False, None)
+        self.retreat_prevention = (False, None)
         shield = (0, None)
         while self.result is False:
             self.turn += 1
@@ -70,9 +72,10 @@ class Match:
             current_player.draw(1)
             playing = True
             self.played_trainer_this_turn = False
-            attached_energy_this_turn = False
+            self.attached_energy_this_turn = False
             if self.turn == 1:
-                attached_energy_this_turn = True
+                self.attached_energy_this_turn = True
+
             for pokemon in opponent.bench_pokemons:
                 if pokemon.ability_id:
                     ability = all_abilities[pokemon.ability_id]
@@ -85,24 +88,13 @@ class Match:
             if supporter_prevention[0] and supporter_prevention[1] == current_player:
                 self.played_trainer_this_turn = True
 
-            retreat_cost_reduction = 0
+            self.retreat_cost_reduction = 0
             bonus_damage_effect = (0, "")
 
             while playing:
-                if current_player.active_pokemon in current_player.cards_in_hand + current_player.remaining_cards + current_player.bench_pokemons:
-                    print(self.turn, "alert")
-                    print(current_player)
-                    raise IndexError
-                playable_cards = self.get_playable_cards(current_player, opponent, retreat_cost_reduction, attack_prevention, retreat_prevention)
-                possible_actions = []
-                if len(playable_cards) > 0:
-                    possible_actions.append("play_card")
 
-                if not attached_energy_this_turn:
-                    possible_actions.append("attach_energy")
-
-                if "attach_energy" not in possible_actions:
-                    possible_actions.append("end_turn")
+                playable_cards = self.get_playable_cards(current_player, opponent)
+                possible_actions = self.get_possible_actions(playable_cards)
                 chosen_action = current_player.agent.get_action(possible_actions+[None], self, "turn_action")
                 if chosen_action is None:
                     continue
@@ -111,20 +103,19 @@ class Match:
 
                 elif chosen_action == "attach_energy":
                     pokemons_to_attach_to = current_player.bench_pokemons + [current_player.active_pokemon]
-                    pokemon_to_attach_to = current_player.agent.get_chosen_card(pokemons_to_attach_to+[None], self)
+                    pokemon_to_attach_to = current_player.agent.get_chosen_card(pokemons_to_attach_to+[None], self, "attaching_energy")
                     if pokemon_to_attach_to is None:
                         continue
-                    attached_energy_this_turn = True
-                    try:
-                        energy = current_player.energy_pile.pop(0)
-                    except IndexError:
+
+                    self.attached_energy_this_turn = True
+                    energy = current_player.energy_pile.pop(0)
+                    if len(current_player.energy_pile) == 0:
                         current_player.refill_energy()
-                        energy = current_player.energy_pile.pop(0)
                     pokemon_to_attach_to.equipped_energies[energy] += 1
 
                 elif chosen_action == "play_card":
 
-                    chosen_card = current_player.agent.get_chosen_card(playable_cards+[None], self)
+                    chosen_card = current_player.agent.get_chosen_card(playable_cards+[None], self, "playing_card")
                     if chosen_card is None:
                         continue
                     if chosen_card.card_type == "pokemon":
@@ -142,17 +133,9 @@ class Match:
                                         evolvable_pokemons.append(bench_pokemon)
                                 if current_player.active_pokemon and current_player.active_pokemon.name == pre_evolution and "ex" not in current_player.active_pokemon.stage and current_player.active_pokemon.turn_since_placement > 1:
                                     evolvable_pokemons.append(current_player.active_pokemon)
-                                if not evolvable_pokemons:
-                                    raise ValueError("No pokemon can evolve into", chosen_card.name)
-                                evolving_pokemon = current_player.agent.get_chosen_card(evolvable_pokemons, self) if len(
-                                    evolvable_pokemons) > 1 else evolvable_pokemons[0]
-                                chosen_card.current_hp -= (evolving_pokemon.max_hp - evolving_pokemon.current_hp)
-                                chosen_card.equipped_energies = evolving_pokemon.equipped_energies.copy()
-                                chosen_card.tool_id = evolving_pokemon.tool_id
-                                if evolving_pokemon == current_player.active_pokemon:
-                                    current_player.active_pokemon = chosen_card
-                                else:
-                                    current_player.bench_pokemons[current_player.bench_pokemons.index(evolving_pokemon)] = chosen_card
+
+                                evolving_pokemon = current_player.agent.get_chosen_card(evolvable_pokemons, self, "who_to_evolve") if len(evolvable_pokemons) > 1 else evolvable_pokemons[0]
+                                self.evolve(chosen_card, evolving_pokemon, current_player)
                             current_player.cards_in_hand.remove(chosen_card)
 
                         elif chosen_card in current_player.bench_pokemons:
@@ -177,12 +160,12 @@ class Match:
                                         current_active_pokemon.hiding = False
                                         current_active_pokemon.damage_nerf = 0
                                         if who_choses_new == "opponent":
-                                            opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
                                             opponent.bench_pokemons.append(current_active_pokemon)
 
                                         elif who_choses_new == "self":
-                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
                                             opponent.bench_pokemons.append(current_active_pokemon)
                                     elif target_player == "self":
@@ -190,12 +173,12 @@ class Match:
                                         current_active_pokemon.hiding = False
                                         current_active_pokemon.damage_nerf = 0
                                         if who_choses_new == "opponent":
-                                            current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                            current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_enemy")
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
                                             current_player.bench_pokemons.append(current_active_pokemon)
 
                                         elif who_choses_new == "self":
-                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_self")
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
                                             current_player.bench_pokemons.append(current_active_pokemon)
 
@@ -206,9 +189,9 @@ class Match:
                                     if targets == "active":
                                         target = opponent.active_pokemon
                                     elif targets == "bench":
-                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "damage_enemy")
                                     elif targets == "any":
-                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons + [opponent.active_pokemon], self)
+                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons + [opponent.active_pokemon], self, "damage_enemy")
                                     target.current_hp -= max(0, damage_amount)
                                     if target.current_hp <= 0:
                                         if 'ex' in target.stage:
@@ -223,7 +206,7 @@ class Match:
                                                 self.result = current_player
                                                 break
                                             else:
-                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
                                         if current_player.points >= 3:
                                             if opponent.points >= 3:
@@ -253,8 +236,7 @@ class Match:
                                         for pokemon in current_player.bench_pokemons:
                                             if pokemon.pokemon_type == pokemon_gaining_energy_type or pokemon_gaining_energy_type == "any":
                                                 possible_targets.append(pokemon)
-                                        current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[
-                                            gained_energy_type] += gained_energy_amount
+                                        current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[gained_energy_type] += gained_energy_amount
 
                                 elif ability.effect_type == "sleep":
                                     coins_to_flip = ability.special_values[0]
@@ -297,7 +279,7 @@ class Match:
                                                 if resulting_poison not in pokemon.effect_status and "super_poisoned" not in pokemon.effect_status:
                                                     possible_targets.append(pokemon)
 
-                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "ability_poison")
                                             if resulting_poison == "poisoned":
                                                 chosen_target.effect_status.append(resulting_poison)
                                             else:
@@ -311,7 +293,7 @@ class Match:
                                                 if resulting_poison not in pokemon.effect_status and "super_poisoned" not in pokemon.effect_status:
                                                     possible_targets.append(pokemon)
 
-                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "ability_poison")
                                             if resulting_poison == "poisoned":
                                                 chosen_target.effect_status.append(resulting_poison)
 
@@ -329,37 +311,21 @@ class Match:
                         elif chosen_card == current_player.active_pokemon:
                             precise_possible_actions = []
 
-                            if chosen_card.ability_id and self.is_ability_conditions_met(chosen_card, current_player,
-                                                                                         opponent):
+                            if chosen_card.ability_id and self.is_ability_conditions_met(chosen_card, current_player, opponent):
                                 precise_possible_actions.append("use_ability")
-                            if sum(chosen_card.equipped_energies.values()) >= chosen_card.retreat_cost - retreat_cost_reduction:
+                            if sum(chosen_card.equipped_energies.values()) >= chosen_card.retreat_cost - self.retreat_cost_reduction:
                                 if "paralyzed" not in chosen_card.effect_status and "asleep" not in chosen_card.effect_status and len(current_player.bench_pokemons) > 0:
                                     precise_possible_actions.append("retreat")
-                            if chosen_card.attack_ids:
-                                if (not attack_prevention[0] or attack_prevention[1] != current_player) and "paralyzed" not in chosen_card.effect_status and "asleep" not in chosen_card.effect_status:
-                                    for attack_id in chosen_card.attack_ids:
-                                        has_energies = True
-                                        attack = all_attacks[attack_id]
-                                        energies_used = 0
-                                        for energy_type, cost in attack.energy_cost.items():
-                                            if energy_type != "normal":
-                                                if chosen_card.equipped_energies[energy_type] < cost:
-                                                    has_energies = False
-                                                    break
-                                                else:
-                                                    energies_used += cost
-                                        if has_energies:
-                                            if attack.energy_cost["normal"] > 0:
-                                                if sum(chosen_card.equipped_energies.values()) - energies_used >= \
-                                                        attack.energy_cost["normal"]:
-                                                    precise_possible_actions.append(f"attack_{attack_id}")
-                                            else:
-                                                precise_possible_actions.append(f"attack_{attack_id}")
+
+                            possible_attacks_id = self.get_possible_attacks(chosen_card, current_player)
+
+                            for attack_id in possible_attacks_id:
+                                precise_possible_actions.append(f"attack_{attack_id}")
 
                             try:
                                 chosen_precise_action = current_player.agent.get_action(precise_possible_actions, self, "precise_action")
                             except Exception as e:
-                                print(sum(chosen_card.equipped_energies.values()), chosen_card.retreat_cost, retreat_cost_reduction, len(current_player.bench_pokemons))
+                                print(sum(chosen_card.equipped_energies.values()), chosen_card.retreat_cost, self.retreat_cost_reduction, len(current_player.bench_pokemons))
                                 print(chosen_card)
                                 print(current_player)
                                 raise e
@@ -379,7 +345,7 @@ class Match:
                                         self.result = opponent
                                         break
                                     else:
-                                        current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                        current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                         current_player.bench_pokemons.remove(current_player.active_pokemon)
 
                                 elif ability.effect_type == "switch_active":
@@ -390,12 +356,12 @@ class Match:
                                         current_active_pokemon.hiding = False
                                         current_active_pokemon.damage_nerf = 0
                                         if who_choses_new == "opponent":
-                                            opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
                                             opponent.bench_pokemons.append(current_active_pokemon)
 
                                         elif who_choses_new == "self":
-                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
                                             opponent.bench_pokemons.append(current_active_pokemon)
 
@@ -404,11 +370,11 @@ class Match:
                                         current_active_pokemon.hiding = False
                                         current_active_pokemon.damage_nerf = 0
                                         if who_choses_new == "opponent":
-                                            current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                            current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_enemy")
                                             current_player.bench_pokemons.append(current_active_pokemon)
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
                                         elif who_choses_new == "self":
-                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_self")
                                             current_player.bench_pokemons.append(current_active_pokemon)
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
                                 elif ability.effect_type == "damage_enemy":
@@ -418,9 +384,9 @@ class Match:
                                     if targets == "active":
                                         target = opponent.active_pokemon
                                     elif targets == "bench":
-                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "damage_enemy")
                                     elif targets == "any":
-                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons + [opponent.active_pokemon], self)
+                                        target = current_player.agent.get_chosen_card(opponent.bench_pokemons + [opponent.active_pokemon], self, "damage_enemy")
                                     target.current_hp -= max(damage_amount, 0)
                                     if target.current_hp <= 0:
                                         if 'ex' in target.stage:
@@ -435,7 +401,7 @@ class Match:
                                                 self.result = current_player
                                                 break
                                             else:
-                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
                                         if current_player.points >= 3:
                                             if opponent.points >= 3:
@@ -465,8 +431,7 @@ class Match:
                                         for pokemon in current_player.bench_pokemons:
                                             if pokemon.pokemon_type == pokemon_gaining_energy_type or pokemon_gaining_energy_type == "any":
                                                 possible_targets.append(pokemon)
-                                        current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[
-                                            gained_energy_type] += gained_energy_amount
+                                        current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[gained_energy_type] += gained_energy_amount
 
                                 elif ability.effect_type == "sleep":
                                     coins_to_flip = ability.special_values[0]
@@ -508,7 +473,7 @@ class Match:
                                             for pokemon in opponent.bench_pokemons:
                                                 if resulting_poison not in pokemon.effect_status and "super_poisoned" not in pokemon.effect_status:
                                                     possible_targets.append(pokemon)
-                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "ability_poison")
                                             if resulting_poison == "poisoned":
                                                 chosen_target.effect_status.append(resulting_poison)
                                             else:
@@ -520,7 +485,7 @@ class Match:
                                             for pokemon in opponent.bench_pokemons:
                                                 if resulting_poison not in pokemon.effect_status and "super_poisoned" not in pokemon.effect_status:
                                                     possible_targets.append(pokemon)
-                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "ability_poison")
                                             if resulting_poison == "poisoned":
                                                 chosen_target.effect_status.append(resulting_poison)
                                             else:
@@ -532,11 +497,11 @@ class Match:
                                     pass
                                 chosen_card.used_ability_this_turn = True
                             elif chosen_precise_action == "retreat":
-                                attack_prevention = (False, None)
+                                self.attack_prevention = (False, None)
                                 chosen_card.effect_status = []
                                 chosen_card.hiding = False
                                 chosen_card.damage_nerf = 0
-                                retreat_cost = max(0, chosen_card.retreat_cost - retreat_cost_reduction)
+                                retreat_cost = max(0, chosen_card.retreat_cost - self.retreat_cost_reduction)
                                 most_energies = sorted(chosen_card.equipped_energies.values(), reverse=True)[0]
                                 if most_energies == sum(chosen_card.equipped_energies.values()):
                                     def find_energy():
@@ -551,7 +516,7 @@ class Match:
                                         chosen_energy = current_player.agent.get_action(energies_removable, self)
                                         chosen_card.equipped_energies[chosen_energy] -= 1
                                         retreat_cost -= 1
-                                pokemon_to_replace_with = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                pokemon_to_replace_with = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                 current_player.bench_pokemons.append(chosen_card)
                                 current_player.bench_pokemons.remove(pokemon_to_replace_with)
                                 current_player.active_pokemon = pokemon_to_replace_with
@@ -606,7 +571,7 @@ class Match:
                                                     self.result = opponent
                                                     break
                                                 else:
-                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                                     current_player.bench_pokemons.remove(current_player.active_pokemon)
                                                 if 'ex' in chosen_card.stage:
                                                     opponent.points += 2
@@ -634,7 +599,7 @@ class Match:
                                             self.result = current_player
                                             break
                                         else:
-                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
                                         if current_player.points >= 3:
                                             if opponent.points >= 3:
@@ -663,12 +628,12 @@ class Match:
                                             current_active_pokemon.hiding = False
                                             current_active_pokemon.damage_nerf = 0
                                             if who_choose_new_active == "opponent":
-                                                opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active")
                                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
                                                 opponent.bench_pokemons.append(current_active_pokemon)
 
                                             elif who_choose_new_active == "self":
-                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
                                                 opponent.bench_pokemons.append(current_active_pokemon)
                                             else:
@@ -678,12 +643,12 @@ class Match:
                                             current_active_pokemon.hiding = False
                                             current_active_pokemon.damage_nerf = 0
                                             if who_choose_new_active == "opponent":
-                                                current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_enemy")
                                                 current_player.bench_pokemons.remove(current_player.active_pokemon)
                                                 current_player.bench_pokemons.append(current_active_pokemon)
 
                                             elif who_choose_new_active == "self":
-                                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "ability_switch_active_self")
                                                 current_player.bench_pokemons.remove(current_player.active_pokemon)
                                                 current_player.bench_pokemons.append(current_active_pokemon)
                                             else:
@@ -746,7 +711,7 @@ class Match:
                                                 for pokemon in current_player.bench_pokemons:
                                                     if pokemon.pokemon_type == type_of_target_pokemon or type_of_target_pokemon == "any":
                                                         possible_targets.append(pokemon)
-                                                current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[energy_type_given] += 1
+                                                current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[energy_type_given] += 1
                                     elif attack.effect_type == "discard_energy":
                                         energy_type_to_discard = attack.special_values[0]
                                         amount_of_energy_to_discard = attack.special_values[1]
@@ -774,7 +739,7 @@ class Match:
                                     elif attack.effect_type == "prevent_attack":
                                         coins_to_flip = attack.special_values[0]
                                         if coins_to_flip == 0 or random.choice([True, False]):
-                                            attack_prevention = (True, opponent)
+                                            self.attack_prevention = (True, opponent)
                                     elif attack.effect_type == "damage_self":
                                         amount_of_damage = attack.special_values[0]
                                         chosen_card.current_hp -= max(amount_of_damage, 0)
@@ -783,7 +748,7 @@ class Match:
                                                 self.result = opponent
                                                 break
                                             else:
-                                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                                 current_player.bench_pokemons.remove(current_player.active_pokemon)
                                             if 'ex' in chosen_card.stage:
                                                 opponent.points += 2
@@ -815,7 +780,7 @@ class Match:
                                                     for pokemon in current_player.bench_pokemons:
                                                         if pokemon.pokemon_type == type_of_target_pokemon or type_of_target_pokemon == "any":
                                                             possible_targets.append(pokemon)
-                                                    current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[energy_type_given] += 1
+                                                    current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[energy_type_given] += 1
                                     elif attack.effect_type == "bonus_damage_with_bonus_energy":
                                         additional_energies_needed = attack.special_values[0]
                                         additional_energy_type = attack.special_values[1]
@@ -856,7 +821,7 @@ class Match:
                                         elif target == "benched":
                                             possible_targets.append(*opponent.bench_pokemons)
                                         if possible_targets:
-                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                            chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "damage_target")
                                             if chosen_target == opponent.active_pokemon:
                                                 damage = damage_done
                                             else:
@@ -877,10 +842,8 @@ class Match:
                                                                 self.result = opponent
                                                                 break
                                                             else:
-                                                                current_player.active_pokemon = current_player.agent.get_chosen_card(
-                                                                    current_player.bench_pokemons, self)
-                                                                current_player.bench_pokemons.remove(
-                                                                    current_player.active_pokemon)
+                                                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
+                                                                current_player.bench_pokemons.remove(current_player.active_pokemon)
                                                             if 'ex' in chosen_card.stage:
                                                                 opponent.points += 2
                                                             else:
@@ -983,7 +946,7 @@ class Match:
                                                 for pokemon in current_player.bench_pokemons:
                                                     possible_targets.append(pokemon)
                                             if possible_targets:
-                                                chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                                chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "damage_target")
                                                 protection_amount = 0
                                                 if chosen_target.ability_id:
                                                     ability = all_abilities[chosen_target.ability_id]
@@ -1039,7 +1002,7 @@ class Match:
                                                     self.result = opponent
                                                     break
                                                 else:
-                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                                     current_player.bench_pokemons.remove(current_player.active_pokemon)
                                                 if 'ex' in chosen_card.stage:
                                                     opponent.points += 2
@@ -1061,13 +1024,13 @@ class Match:
                                         if len(valid_targets) > 0:
                                             chosen_card.hiding = False
                                             chosen_card.damage_nerf = 0
-                                            current_player.active_pokemon = current_player.agent.get_chosen_card(valid_targets, self)
+                                            current_player.active_pokemon = current_player.agent.get_chosen_card(valid_targets, self, "choose_new_active")
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
                                             current_player.bench_pokemons.append(chosen_card)
                                     elif attack.effect_type == "lifesteal":
                                         lifesteal = True
                                     elif attack.effect_type == "no_retreat":
-                                        retreat_prevention = (True, opponent)
+                                        self.retreat_prevention = (True, opponent)
                                     elif attack.effect_type == "place_pokemon_on_bench":
                                         if len(current_player.bench_pokemons) < 3:
                                             pokemon_name = attack.special_values[0]
@@ -1131,7 +1094,7 @@ class Match:
                                                 if way_of_selection == "random":
                                                     card_to_remove = random.choice(possible_targets)
                                                 elif way_of_selection == "chosen":
-                                                    card_to_remove = current_player.agent.get_chosen_card(possible_targets, self)
+                                                    card_to_remove = current_player.agent.get_chosen_card(possible_targets, self, "discard_from_hand")
                                                 else:
                                                     raise ValueError("wrong way of selection")
 
@@ -1154,7 +1117,7 @@ class Match:
                                                     self.result = opponent
                                                     break
                                                 else:
-                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                                     current_player.bench_pokemons.remove(current_player.active_pokemon)
                                             elif target == "enemy":
                                                 opponent.active_pokemon.hiding = False
@@ -1167,7 +1130,7 @@ class Match:
                                                     self.result = current_player
                                                     break
                                                 else:
-                                                    opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                    opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                                     opponent.bench_pokemons.remove(opponent.active_pokemon)
                                     else:
 
@@ -1202,7 +1165,7 @@ class Match:
                                                         break
                                                     else:
                                                         current_player.active_pokemon = current_player.agent.get_chosen_card(
-                                                            current_player.bench_pokemons, self)
+                                                            current_player.bench_pokemons, self, "choose_new_active")
                                                         current_player.bench_pokemons.remove(
                                                             current_player.active_pokemon)
                                                     if 'ex' in chosen_card.stage:
@@ -1231,7 +1194,7 @@ class Match:
                                                 self.result = current_player
                                                 break
                                             else:
-                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
                                             if 'ex' in active_opponent.stage:
                                                 current_player.points += 2
@@ -1265,7 +1228,7 @@ class Match:
                                         possible_targets.append(pokemon)
                                 if current_player.active_pokemon.pokemon_type == target_type and current_player.active_pokemon.current_hp + heal_amount <= current_player.active_pokemon.max_hp:
                                     possible_targets.append(current_player.active_pokemon)
-                                current_player.agent.get_chosen_card(possible_targets, self).current_hp += heal_amount
+                                current_player.agent.get_chosen_card(possible_targets, self, "heal").current_hp += heal_amount
                             elif targets == "active":
                                 current_player.active_pokemon.current_hp += heal_amount
                             elif targets == "bench":
@@ -1273,7 +1236,7 @@ class Match:
                                 for pokemon in current_player.bench_pokemons:
                                     if pokemon.pokemon_type == target_type and pokemon.current_hp + heal_amount <= pokemon.max_hp:
                                         possible_targets.append(pokemon)
-                                current_player.agent.get_chosen_card(possible_targets, self).current_hp += heal_amount
+                                current_player.agent.get_chosen_card(possible_targets, self, "heal").current_hp += heal_amount
 
                         elif trainer.effect == "draw":
                             amount_draw = trainer.special_values[0]
@@ -1300,9 +1263,9 @@ class Match:
                                     if current_player.active_pokemon.card_id in brock_list:
                                         possible_targets.append(current_player.active_pokemon)
                             if coins_to_flip == 0:
-                                current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[target_type] += 1
+                                current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[target_type] += 1
                             elif coins_to_flip == -1:
-                                chosen_target = current_player.agent.get_chosen_card(possible_targets, self)
+                                chosen_target = current_player.agent.get_chosen_card(possible_targets, self, "gain_energy")
                                 while True:
                                     if random.choice([True, False]):
                                         chosen_target.equipped_energies[target_type] += 1
@@ -1311,7 +1274,7 @@ class Match:
                             else:
                                 for i in range(coins_to_flip):
                                     if random.choice([True, False]):
-                                        current_player.agent.get_chosen_card(possible_targets, self).equipped_energies[target_type] += 1
+                                        current_player.agent.get_chosen_card(possible_targets, self, "gain_energy").equipped_energies[target_type] += 1
 
                         elif trainer.effect == "bonus_damage":
                             bonus_damage_effect = (trainer.special_values[0], trainer.special_values[1])
@@ -1325,7 +1288,7 @@ class Match:
                                     if restrictions == "any" or (restrictions == "koga_list" and current_player.active_pokemon.card_id in koga_list):
                                         current_player.active_pokemon.reset()
                                         current_player.cards_in_hand.append(current_player.active_pokemon)
-                                        current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                        current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                         current_player.bench_pokemons.remove(current_player.active_pokemon)
 
                                 elif targets == "enemy":
@@ -1333,7 +1296,7 @@ class Match:
 
                                         opponent.active_pokemon.reset()
                                         opponent.cards_in_hand.append(opponent.active_pokemon)
-                                        opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                        opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                         opponent.bench_pokemons.remove(opponent.active_pokemon)
 
                             elif coins_to_flip == 1:
@@ -1343,7 +1306,7 @@ class Match:
                                                 restrictions == "koga_list" and current_player.active_pokemon.card_id in koga_list):
                                             current_player.active_pokemon.reset()
                                             current_player.cards_in_hand.append(current_player.active_pokemon)
-                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                            current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                             current_player.bench_pokemons.remove(current_player.active_pokemon)
 
                                     elif targets == "enemy":
@@ -1358,7 +1321,7 @@ class Match:
                                                                           'metal': 0, 'dragon': 0, 'fairy': 0}
                                             opponent.active_pokemon.current_hp = opponent.active_pokemon.max_hp
                                             opponent.cards_in_hand.append(opponent.active_pokemon)
-                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                            opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                             opponent.bench_pokemons.remove(opponent.active_pokemon)
 
                             else:
@@ -1371,14 +1334,14 @@ class Match:
                                 if who_choses_new == "opponent":
                                     current_active_pokemon = opponent.active_pokemon
                                     opponent.active_pokemon.hiding = False
-                                    opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                    opponent.active_pokemon = opponent.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active")
                                     opponent.bench_pokemons.remove(opponent.active_pokemon)
                                     opponent.bench_pokemons.append(current_active_pokemon)
 
                                 elif who_choses_new == "self":
                                     current_active_pokemon = opponent.active_pokemon
                                     opponent.active_pokemon.hiding = False
-                                    opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                    opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                     opponent.bench_pokemons.remove(opponent.active_pokemon)
                                     opponent.bench_pokemons.append(current_active_pokemon)
 
@@ -1386,14 +1349,14 @@ class Match:
                                 if who_choses_new == "opponent":
                                     current_active_pokemon = current_player.active_pokemon
                                     current_player.active_pokemon.hiding = False
-                                    current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                    current_player.active_pokemon = opponent.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active_opponent")
                                     current_player.bench_pokemons.remove(current_player.active_pokemon)
                                     current_player.bench_pokemons.append(current_active_pokemon)
 
                                 elif who_choses_new == "self":
                                     current_active_pokemon = current_player.active_pokemon
                                     current_player.active_pokemon.hiding = False
-                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                    current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                     current_player.bench_pokemons.remove(current_player.active_pokemon)
                                     current_player.bench_pokemons.append(current_active_pokemon)
 
@@ -1406,13 +1369,12 @@ class Match:
                                         pokemon.equipped_energies[target_type] = 0
                         current_player.cards_in_hand.remove(chosen_card)
                         self.played_trainer_this_turn = True
-
                     elif chosen_card.card_type == "item":
                         chosen_card: Item
                         item = chosen_card
                         if item.effect == "heal":
-                            targets = item.special_values[1]
                             heal_amount = item.special_values[0]
+                            targets = item.special_values[1]
                             if targets == "active":
                                 current_player.active_pokemon.current_hp += heal_amount
 
@@ -1421,7 +1383,7 @@ class Match:
                                 for pokemon in current_player.bench_pokemons:
                                     if pokemon.current_hp + heal_amount <= pokemon.max_hp:
                                         possible_targets.append(pokemon)
-                                current_player.agent.get_chosen_card(possible_targets, self).current_hp += heal_amount
+                                current_player.agent.get_chosen_card(possible_targets, self, "heal").current_hp += heal_amount
 
                             elif targets == "any":
                                 possible_targets = []
@@ -1430,10 +1392,10 @@ class Match:
                                 for pokemon in current_player.bench_pokemons:
                                     if pokemon.current_hp + heal_amount <= pokemon.max_hp:
                                         possible_targets.append(pokemon)
-                                current_player.agent.get_chosen_card(possible_targets, self).current_hp += heal_amount
+                                current_player.agent.get_chosen_card(possible_targets, self, "heal").current_hp += heal_amount
 
                         elif item.effect == "retreat_reduced_cost":
-                            retreat_cost_reduction = item.special_values[0]
+                            self.retreat_cost_reduction = item.special_values[0]
 
                         elif item.effect == "opponent_reveal_hand":
                             # todo
@@ -1462,20 +1424,16 @@ class Match:
                             target = item.special_values[1]
 
                             if target == "enemy":
-                                for i in range(len(opponent.cards_in_hand)):
-                                    try:
-                                        random_index = random.randint(0, len(opponent.remaining_cards) - 1)
-                                    except ValueError:
-                                        print(len(opponent.cards_in_hand))
-                                        break
-
-                                    opponent.remaining_cards.insert(random_index, opponent.cards_in_hand.pop(0))
+                                for card in list(opponent.cards_in_hand):
+                                    opponent.cards_in_hand.remove(card)
+                                    opponent.remaining_cards.append(card)
+                                random.shuffle(opponent.remaining_cards)
                                 opponent.draw(cards_to_draw)
                             else:
-                                for i in range(len(current_player.cards_in_hand)):
-                                    random_index = random.randint(0, len(current_player.remaining_cards) - 1)
-                                    current_player.remaining_cards.insert(random_index,
-                                                                          current_player.cards_in_hand.pop(0))
+                                for card in list(current_player.cards_in_hand):
+                                    current_player.cards_in_hand.remove(card)
+                                    current_player.remaining_cards.append(card)
+                                random.shuffle(current_player.remaining_cards)
                                 current_player.draw(cards_to_draw)
                         current_player.cards_in_hand.remove(chosen_card)
 
@@ -1494,16 +1452,16 @@ class Match:
                 self.result = current_player
                 break
             self.current_player = 1 if self.current_player == 2 else 2
-            if attack_prevention[1] == current_player:
-                attack_prevention = (False, None)
+            if self.attack_prevention[1] == current_player:
+                self.attack_prevention = (False, None)
             if supporter_prevention[1] == current_player:
                 supporter_prevention = (False, None)
-            if retreat_prevention[1] == current_player:
-                retreat_prevention = (False, None)
+            if self.retreat_prevention[1] == current_player:
+                self.retreat_prevention = (False, None)
             if shield[1] == current_player:
                 shield = (0, None)
             opponent.active_pokemon.hiding = False
-            retreat_cost_reduction = 0
+
             for pokemon in opponent.bench_pokemons + [opponent.active_pokemon]:
                 pokemon.used_ability_this_turn = False
                 if "asleep" in pokemon.effect_status:
@@ -1523,7 +1481,7 @@ class Match:
                                 self.result = current_player
                                 break
                             else:
-                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
 
                 elif "super_poisoned" in pokemon.effect_status:
@@ -1540,7 +1498,7 @@ class Match:
                                 self.result = current_player
                                 break
                             else:
-                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self)
+                                opponent.active_pokemon = current_player.agent.get_chosen_card(opponent.bench_pokemons, self, "choose_new_active_opponent")
                                 opponent.bench_pokemons.remove(opponent.active_pokemon)
             for pokemon in current_player.bench_pokemons + [current_player.active_pokemon]:
                 pokemon.used_ability_this_turn = False
@@ -1563,7 +1521,7 @@ class Match:
                                 self.result = current_player
                                 break
                             else:
-                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                 current_player.bench_pokemons.remove(current_player.active_pokemon)
 
                 elif "super_poisoned" in pokemon.effect_status:
@@ -1580,7 +1538,7 @@ class Match:
                                 self.result = current_player
                                 break
                             else:
-                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self)
+                                current_player.active_pokemon = current_player.agent.get_chosen_card(current_player.bench_pokemons, self, "choose_new_active")
                                 current_player.bench_pokemons.remove(current_player.active_pokemon)
 
             if current_player.points >= 3:
@@ -1599,7 +1557,7 @@ class Match:
                 break
         return self.result
 
-    def get_playable_cards(self, current_player, opponent, retreat_cost_reduction=0, attack_prevention=None, retreat_prevention=None):
+    def get_playable_cards(self, current_player, opponent):
         playable_cards = []
         for card in current_player.cards_in_hand:
             if card.card_type == "pokemon":
@@ -1627,11 +1585,11 @@ class Match:
                     playable_cards.append(card)
         for card in current_player.bench_pokemons + [current_player.active_pokemon]:
             if card:
-                if self.conditions_are_met(card, "pokemon", current_player, opponent, retreat_cost_reduction, attack_prevention, retreat_prevention):
+                if self.conditions_are_met(card, "pokemon", current_player, opponent):
                     playable_cards.append(card)
         return playable_cards
 
-    def conditions_are_met(self, card, card_type, player, opponent, retreat_cost_reduction=0, attack_prevention=None, retreat_prevention=None):
+    def conditions_are_met(self, card, card_type, player, opponent):
         if card_type == "trainer":
             if card.effect == "heal":
                 target_type = card.special_values[1]
@@ -1732,11 +1690,9 @@ class Match:
                 heal_amount = card.special_values[0]
                 target_type = card.special_values[1]
                 for pokemon in player.bench_pokemons:
-                    if (
-                            target_type == "any" or pokemon.pokemon_type == target_type) and pokemon.current_hp + heal_amount <= pokemon.max_hp:
+                    if (target_type == "any" or pokemon.pokemon_type == target_type) and pokemon.current_hp + heal_amount <= pokemon.max_hp:
                         return True
-                if (
-                        target_type == "any" or player.active_pokemon.pokemon_type == target_type) and player.active_pokemon.current_hp + heal_amount <= player.active_pokemon.max_hp:
+                if (target_type == "any" or player.active_pokemon.pokemon_type == target_type) and player.active_pokemon.current_hp + heal_amount <= player.active_pokemon.max_hp:
                     return True
             elif card.effect == "retreat_reduced_cost":
                 return True
@@ -1753,9 +1709,9 @@ class Match:
             elif card.effect == "shuffle_hand_and_draw":
                 return True
         elif card_type == "pokemon":
-            if card == player.active_pokemon and sum(card.equipped_energies.values()) >= card.retreat_cost-retreat_cost_reduction and "paralyzed" not in card.effect_status and "asleep" not in card.effect_status and len(player.bench_pokemons) > 0 and retreat_prevention[1] != player:
+            if card == player.active_pokemon and sum(card.equipped_energies.values()) >= card.retreat_cost-self.retreat_cost_reduction and "paralyzed" not in card.effect_status and "asleep" not in card.effect_status and len(player.bench_pokemons) > 0 and self.retreat_prevention[1] != player:
                 return True
-            if card == player.active_pokemon and "paralyzed" not in card.effect_status and "asleep" not in card.effect_status and attack_prevention[1] != player:
+            if card == player.active_pokemon and "paralyzed" not in card.effect_status and "asleep" not in card.effect_status and self.attack_prevention[1] != player:
                 for attack_id in card.attack_ids:
                     has_energies = True
                     attack = all_attacks[attack_id]
@@ -1845,3 +1801,61 @@ class Match:
                                 return opponent.active_pokemon is not None or len(opponent.bench_pokemons) > 0
                 elif ability.effect_type == "look_at_deck":
                     return True
+
+    def get_possible_attacks(self, pokemon, current_player):
+        valid_attack_ids = []
+        if pokemon.attack_ids:
+            if (not self.attack_prevention[0] or self.attack_prevention[1] != current_player) and "paralyzed" not in pokemon.effect_status and "asleep" not in pokemon.effect_status:
+                for attack_id in pokemon.attack_ids:
+                    has_energies = True
+                    attack = all_attacks[attack_id]
+                    energies_used = 0
+                    for energy_type, cost in attack.energy_cost.items():
+                        if energy_type != "normal":
+                            if pokemon.equipped_energies[energy_type] < cost:
+                                has_energies = False
+                                break
+                            else:
+                                energies_used += cost
+                    if has_energies:
+                        if attack.energy_cost["normal"] > 0:
+                            if sum(pokemon.equipped_energies.values()) - energies_used >= \
+                                    attack.energy_cost["normal"]:
+                                valid_attack_ids.append(attack_id)
+                        else:
+                            valid_attack_ids.append(attack_id)
+        return valid_attack_ids
+
+    def get_possible_actions(self, playable_cards):
+        possible_actions = []
+        if len(playable_cards) > 0:
+            possible_actions.append("play_card")
+
+        if not self.attached_energy_this_turn:
+            possible_actions.append("attach_energy")
+
+        if "attach_energy" not in possible_actions:
+            possible_actions.append("end_turn")
+        return possible_actions
+
+    def evolve(self, evolution, evolving_pokemon, current_player):
+        evolution.current_hp -= (evolving_pokemon.max_hp - evolving_pokemon.current_hp)
+        evolution.equipped_energies = evolving_pokemon.equipped_energies.copy()
+        evolution.tool_id = evolving_pokemon.tool_id
+        if evolving_pokemon == current_player.active_pokemon:
+            current_player.active_pokemon = evolution
+        else:
+            current_player.bench_pokemons[current_player.bench_pokemons.index(evolving_pokemon)] = evolution
+
+    def get_possible_evolutions(self, current_player):
+        evolutions = []
+        for card in current_player.cards_in_hand:
+            if card.card_type == "pokemon" and "basic" not in card.stage :
+                pre_evolution_name = card.pre_evolution_name
+                pre_evolutions = []
+                for pokemon in current_player.bench_pokemons + [current_player.active_pokemon]:
+                    if pokemon and pokemon.name == pre_evolution_name and "ex" not in pokemon.stage and pokemon.turn_since_placement > 1:
+                        pre_evolutions.append(pokemon)
+                if pre_evolutions:
+                    evolutions.append((card, pre_evolutions))
+        return evolutions

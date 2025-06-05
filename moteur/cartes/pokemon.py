@@ -23,7 +23,7 @@ class Pokemon:
 
 
     def __str__(self):
-        return f"{self.name} ({self.stage}) ({self.ability_id})- {self.current_hp}/{self.max_hp} HP - Energies {sum(self.equipped_energies.values())} - Status: {self.effect_status} - Retreat Cost: {self.retreat_cost} - Type: {self.pokemon_type} - Weakness: {self.weakness}"
+        return f"{self.name} ({self.stage}) ({self.ability_id})- {self.current_hp}/{self.max_hp} HP - Energies {self.equipped_energies} - Status: {self.effect_status} - Retreat Cost: {self.retreat_cost} - Type: {self.pokemon_type} - Weakness: {self.weakness}"
 
     def __repr__(self):
         return str(self)
