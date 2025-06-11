@@ -25,5 +25,3 @@ class CardLoader:
         
         return None
     
-# Create a global instance for easy access
-card_loader = CardLoader()

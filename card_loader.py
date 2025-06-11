@@ -197,8 +197,8 @@ class CardLoader:
         variants = self._pokemon_by_name.get(name, [])
         return [f"{p.name} (ID: {p.card_id}, HP: {p.max_hp})" for p in variants]
 
-# Create a global instance for easy access
-card_loader = CardLoader()
+# # Create a global instance for easy access
+# card_loader = CardLoader()
 
 # Convenience functions for backward compatibility
 def get_card_by_id(card_id: str):

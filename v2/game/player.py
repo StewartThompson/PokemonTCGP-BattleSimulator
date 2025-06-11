@@ -63,6 +63,9 @@ class Player:
                 self.deck = self._original_deck
                 self.cards_in_hand = []
 
+    def get_basic_pokemon(self):
+        return [card for card in self.cards_in_hand if card.subtype == "Basic"]
+
     def shuffle_deck(self):
         random.shuffle(self.deck)
 

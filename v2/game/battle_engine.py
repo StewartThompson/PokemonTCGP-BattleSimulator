@@ -57,11 +57,6 @@ class BattleEngine:
         """Initialize game state"""
         self.log("Setting up battle...")
         
-        # Validate decks
-        for player in self.players:
-            if not GameRules.is_valid_deck(player.deck):
-                raise ValueError(f"Invalid deck for {player.name}")
-        
         # Determine first player
         self.current_player_index = random.randint(0, 1)
         self.log(f"{self.current_player.name} goes first!")
@@ -75,28 +70,14 @@ class BattleEngine:
     def _setup_player(self, player: Player):
         """Setup individual player with mulligan handling"""
         # Draw initial hand
-        for _ in range(GameRules.INITIAL_HAND_SIZE):
-            player.draw_card()
-        
-        # Handle mulligan for basic Pokemon
-        attempts = 0
-        while not player.get_basic_pokemon() and attempts < 3:
-            self.log(f"{player.name} mulligan - no basic Pokemon")
-            player.deck.extend(player.hand)
-            player.hand.clear()
-            random.shuffle(player.deck)
-            for _ in range(GameRules.INITIAL_HAND_SIZE):
-                player.draw_card()
-            attempts += 1
+        player.draw_inital_hand()  
         
         # Set active Pokemon
         basic_pokemon = player.get_basic_pokemon()
-        if basic_pokemon:
-            active = basic_pokemon[0]
-            player.play_card_to_location(active, "active")
-            self.log(f"{player.name} sets {active.name} as active")
-        else:
-            raise ValueError(f"Cannot setup active Pokemon for {player.name}")
+        
+        active = basic_pokemon[0]
+        player.play_card_to_location(active, "active")
+        self.log(f"{player.name} sets {active.name} as active")
     
     def _execute_turn(self):
         """Execute a complete turn"""

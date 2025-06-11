@@ -11,8 +11,8 @@ def get_deck():
         card_loader.get_card_by_id('pa-001'),
 
         # Bulbasaur x2
-        card_loader.get_pokemon_by_id('a1-001'),
-        card_loader.get_pokemon_by_id('a1-001'),
+        card_loader.get_card_by_id('a1-001'),
+        card_loader.get_card_by_id('a1-001'),
         
         # Ivysaur x2
         card_loader.get_pokemon_by_id('a1-002'),

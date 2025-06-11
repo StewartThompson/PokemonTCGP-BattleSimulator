@@ -30,7 +30,7 @@ class Match:
     def start_battle(self):
         """Start battle and return winner"""
         battle_engine = BattleEngine(self.deck1, self.deck2, self.debug)
-        battle_engine.run()
+        battle_engine.start_battle()
 
         return battle_engine.winner
     
