@@ -1,0 +1,766 @@
+Loading card database from JSON files...
+Loading database from: /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon
+Initializing cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon...
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a3a-extradimensional-crisis.json...
+Found 103 cards to process...
+Set 33 evolution relationships
+Total evolution relationships: 31
+Import complete!
+Created 93 Pokemon
+Created 76 unique attacks
+Created 11 unique abilities
+Created 6 trainers
+Created 2 tools
+Created 2 items
+Created 0 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/promo.json...
+Found 73 cards to process...
+Set 6 evolution relationships
+Total evolution relationships: 33
+Import complete!
+Created 158 Pokemon
+Created 135 unique attacks
+Created 16 unique abilities
+Created 7 trainers
+Created 2 tools
+Created 9 items
+Created 0 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a2-space-time-smackdown.json...
+Found 207 cards to process...
+Set 83 evolution relationships
+Total evolution relationships: 96
+Import complete!
+Created 347 Pokemon
+Created 265 unique attacks
+Created 26 unique abilities
+Created 19 trainers
+Created 5 tools
+Created 10 items
+Created 2 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a2b-shining-revelry.json...
+Found 111 cards to process...
+Set 43 evolution relationships
+Total evolution relationships: 119
+Import complete!
+Created 449 Pokemon
+Created 321 unique attacks
+Created 30 unique abilities
+Created 27 trainers
+Created 5 tools
+Created 11 items
+Created 2 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a3-celestial-guardians.json...
+Found 239 cards to process...
+Set 85 evolution relationships
+Total evolution relationships: 170
+Import complete!
+Created 664 Pokemon
+Created 447 unique attacks
+Created 41 unique abilities
+Created 45 trainers
+Created 7 tools
+Created 15 items
+Created 2 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a2a-triumphant-light.json...
+Found 96 cards to process...
+Set 32 evolution relationships
+Total evolution relationships: 182
+Import complete!
+Created 752 Pokemon
+Created 499 unique attacks
+Created 50 unique abilities
+Created 53 trainers
+Created 7 tools
+Created 15 items
+Created 2 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a1a-mythical-island.json...
+Found 86 cards to process...
+Set 32 evolution relationships
+Total evolution relationships: 201
+Import complete!
+Created 829 Pokemon
+Created 544 unique attacks
+Created 52 unique abilities
+Created 59 trainers
+Created 7 tools
+Created 17 items
+Created 3 fossils
+Loading cards from /Users/stewartthompson/Documents/repos/PokemonTCGP-BattleSimulator/assets/database/pokemon/a1-genetic-apex.json...
+Found 286 cards to process...
+Set 118 evolution relationships
+Total evolution relationships: 248
+Import complete!
+Created 1096 Pokemon
+Created 656 unique attacks
+Created 60 unique abilities
+Created 75 trainers
+Created 7 tools
+Created 17 items
+Created 6 fossils
+✅ Successfully imported 8 out of 8 JSON files
+✅ Initialization completed successfully
+Database loaded successfully!
+
+=== DATABASE SUMMARY ===
+Pokemon: 1096
+Attacks: 656
+Abilities: 60
+Trainers: 75
+Tools: 7
+Items: 17
+Fossils: 6
+Loading all cards from JSON files...
+Initializing cards from assets/database/pokemon...
+Loading cards from assets/database/pokemon/a3a-extradimensional-crisis.json...
+Found 103 cards to process...
+Set 33 evolution relationships
+Total evolution relationships: 31
+Import complete!
+Created 93 Pokemon
+Created 76 unique attacks
+Created 11 unique abilities
+Created 6 trainers
+Created 2 tools
+Created 2 items
+Created 0 fossils
+Loading cards from assets/database/pokemon/promo.json...
+Found 73 cards to process...
+Set 6 evolution relationships
+Total evolution relationships: 33
+Import complete!
+Created 158 Pokemon
+Created 135 unique attacks
+Created 16 unique abilities
+Created 7 trainers
+Created 2 tools
+Created 9 items
+Created 0 fossils
+Loading cards from assets/database/pokemon/a2-space-time-smackdown.json...
+Found 207 cards to process...
+Set 83 evolution relationships
+Total evolution relationships: 96
+Import complete!
+Created 347 Pokemon
+Created 265 unique attacks
+Created 26 unique abilities
+Created 19 trainers
+Created 5 tools
+Created 10 items
+Created 2 fossils
+Loading cards from assets/database/pokemon/a2b-shining-revelry.json...
+Found 111 cards to process...
+Set 43 evolution relationships
+Total evolution relationships: 119
+Import complete!
+Created 449 Pokemon
+Created 321 unique attacks
+Created 30 unique abilities
+Created 27 trainers
+Created 5 tools
+Created 11 items
+Created 2 fossils
+Loading cards from assets/database/pokemon/a3-celestial-guardians.json...
+Found 239 cards to process...
+Set 85 evolution relationships
+Total evolution relationships: 170
+Import complete!
+Created 664 Pokemon
+Created 447 unique attacks
+Created 41 unique abilities
+Created 45 trainers
+Created 7 tools
+Created 15 items
+Created 2 fossils
+Loading cards from assets/database/pokemon/a2a-triumphant-light.json...
+Found 96 cards to process...
+Set 32 evolution relationships
+Total evolution relationships: 182
+Import complete!
+Created 752 Pokemon
+Created 499 unique attacks
+Created 50 unique abilities
+Created 53 trainers
+Created 7 tools
+Created 15 items
+Created 2 fossils
+Loading cards from assets/database/pokemon/a1a-mythical-island.json...
+Found 86 cards to process...
+Set 32 evolution relationships
+Total evolution relationships: 201
+Import complete!
+Created 829 Pokemon
+Created 544 unique attacks
+Created 52 unique abilities
+Created 59 trainers
+Created 7 tools
+Created 17 items
+Created 3 fossils
+Loading cards from assets/database/pokemon/a1-genetic-apex.json...
+Found 286 cards to process...
+Set 118 evolution relationships
+Total evolution relationships: 248
+Import complete!
+Created 1096 Pokemon
+Created 656 unique attacks
+Created 60 unique abilities
+Created 75 trainers
+Created 7 tools
+Created 17 items
+Created 6 fossils
+✅ Successfully imported 8 out of 8 JSON files
+✅ Initialization completed successfully
+✅ Successfully loaded 1096 Pokemon, 75 trainers, 17 items, 7 tools, 6 fossils
+Running simulation 1/1
+[Turn 0] Starting turn 1 for Stewart
+[Turn 1] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 1] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {}
+[Turn 1] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 1] Stewart chose action: end_turn
+[Turn 1]     Stewart - Active Pokemon: Scyther (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Paras (70/70)
+[Turn 1]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 1] Starting turn 2 for Kimberly
+[Turn 2] Kimberly draws a card. Hand size: 2
+[Turn 2] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 2] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 2] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 2] Kimberly chose action: pokemon_action
+[Turn 2] Kimberly chose Pokemon for action: Horsea
+[Turn 2] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 2] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 2] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 2] Kimberly chose action: end_turn
+[Turn 2]     Stewart - Active Pokemon: Scyther (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Paras (70/70)
+[Turn 2]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 2] Starting turn 3 for Stewart
+[Turn 3] Stewart draws a card. Hand size: 2
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 3] Stewart chose action: attach_energy
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {}
+[Turn 3] Stewart attached grass energy to Scyther
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {'grass': 1}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Paras
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {'grass': 1}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {'grass': 1}
+[Turn 3] Checking Venonat attack Tackle (ID: attack_55) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Venonat cannot use Tackle - needs {'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Venonat attack Tackle (ID: attack_55) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Venonat cannot use Tackle - needs {'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Venonat
+[Turn 3] Checking Venonat attack Tackle (ID: attack_55) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Venonat cannot use Tackle - needs {'normal': 1}, has {}
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Scyther attack Sharp Scythe (ID: attack_480) - needs {'fire': 0, 'water': 0, 'rock': 1, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Scyther cannot use Sharp Scythe - needs {'rock': 1}, has {}
+[Turn 3] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 3] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 3] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 3] Stewart chose action: pokemon_action
+[Turn 3] Stewart chose Pokemon for action: Scyther
+[Turn 3] Maximum actions reached for turn 3, forcing end turn
+[Turn 3]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 3]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 3] Starting turn 4 for Kimberly
+[Turn 4] Kimberly draws a card. Hand size: 3
+[Turn 4] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 4] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 4] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 4] Kimberly chose action: attach_energy
+[Turn 4] Kimberly attached water energy to Staryu
+[Turn 4] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 4] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 4] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 4] Kimberly chose action: end_turn
+[Turn 4]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 4]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 4] Starting turn 5 for Stewart
+[Turn 5] Stewart draws a card. Hand size: 3
+[Turn 5] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 5] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 5] Possible actions for Stewart: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 5] Stewart chose action: attach_energy
+[Turn 5] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 5] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {}
+[Turn 5] Stewart attached grass energy to Paras
+[Turn 5] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 5] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {'grass': 1}
+[Turn 5] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 5] Stewart chose action: end_turn
+[Turn 5]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 5]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 5] Starting turn 6 for Kimberly
+[Turn 6] Kimberly draws a card. Hand size: 4
+[Turn 6] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 6] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 6] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 6] Kimberly chose action: pokemon_action
+[Turn 6] Kimberly chose Pokemon for action: Staryu
+[Turn 6] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 6] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 6] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 6] Kimberly chose action: end_turn
+[Turn 6]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 6]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 6] Starting turn 7 for Stewart
+[Turn 7] Stewart draws a card. Hand size: 4
+[Turn 7] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 7] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {'grass': 1}
+[Turn 7] Possible actions for Stewart: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 7] Stewart chose action: attach_energy
+[Turn 7] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 7] Paras cannot use Scratch - needs {'grass': 1, 'normal': 1}, has {'grass': 1}
+[Turn 7] Stewart attached grass energy to Paras
+[Turn 7] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 7] Paras can use Scratch (has sufficient energy)
+[Turn 7] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 7] Stewart chose action: pokemon_action
+[Turn 7] Stewart chose Pokemon for action: Scyther
+[Turn 7] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 7] Paras can use Scratch (has sufficient energy)
+[Turn 7] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 7] Stewart chose action: end_turn
+[Turn 7]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 7]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 7] Starting turn 8 for Kimberly
+[Turn 8] Kimberly draws a card. Hand size: 5
+[Turn 8] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 8] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 8] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 8] Kimberly chose action: pokemon_action
+[Turn 8] Kimberly chose Pokemon for action: Horsea
+[Turn 8] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 8] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 8] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 8] Kimberly chose action: pokemon_action
+[Turn 8] Kimberly chose Pokemon for action: Horsea
+[Turn 8] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 8] Goldeen cannot use Flop - needs {'normal': 1}, has {}
+[Turn 8] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 8] Kimberly chose action: attach_energy
+[Turn 8] Kimberly attached water energy to Goldeen
+[Turn 8] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 8] Goldeen can use Flop (has sufficient energy)
+[Turn 8] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 8] Kimberly chose action: end_turn
+[Turn 8]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 8]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 8] Starting turn 9 for Stewart
+[Turn 9] Stewart draws a card. Hand size: 5
+[Turn 9] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 9] Paras can use Scratch (has sufficient energy)
+[Turn 9] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 9] Stewart chose action: end_turn
+[Turn 9]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 9]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 9] Starting turn 10 for Kimberly
+[Turn 10] Kimberly draws a card. Hand size: 6
+[Turn 10] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 10] Goldeen can use Flop (has sufficient energy)
+[Turn 10] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 10] Kimberly chose action: end_turn
+[Turn 10]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 10]     Kimberly - Active Pokemon: Goldeen (60/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 10] Starting turn 11 for Stewart
+[Turn 11] Stewart draws a card. Hand size: 6
+[Turn 11] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 11] Paras can use Scratch (has sufficient energy)
+[Turn 11] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 11] Stewart chose action: pokemon_action
+[Turn 11] Stewart chose Pokemon for action: Paras
+[Turn 11] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 11] Paras can use Scratch (has sufficient energy)
+[Turn 11] Paras uses Scratch for 30 damage!
+[Turn 11] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 11] Paras can use Scratch (has sufficient energy)
+[Turn 11] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 11] Stewart chose action: end_turn
+[Turn 11]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 11]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 11] Starting turn 12 for Kimberly
+[Turn 12] Kimberly draws a card. Hand size: 7
+[Turn 12] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 12] Goldeen can use Flop (has sufficient energy)
+[Turn 12] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 12] Kimberly chose action: end_turn
+[Turn 12]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 12]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 12] Starting turn 13 for Stewart
+[Turn 13] Stewart draws a card. Hand size: 7
+[Turn 13] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 13] Paras can use Scratch (has sufficient energy)
+[Turn 13] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 13] Stewart chose action: end_turn
+[Turn 13]     Stewart - Active Pokemon: Paras (70/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 13]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 13] Starting turn 14 for Kimberly
+[Turn 14] Kimberly draws a card. Hand size: 8
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 14] Kimberly chose action: pokemon_action
+[Turn 14] Kimberly chose Pokemon for action: Staryu
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'attach_energy', 'pokemon_action']
+[Turn 14] Kimberly chose action: attach_energy
+[Turn 14] Kimberly attached water energy to Goldeen
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 14] Kimberly chose action: pokemon_action
+[Turn 14] Kimberly chose Pokemon for action: Magikarp
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 14] Kimberly chose action: pokemon_action
+[Turn 14] Kimberly chose Pokemon for action: Horsea
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 14] Kimberly chose action: pokemon_action
+[Turn 14] Kimberly chose Pokemon for action: Goldeen
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Goldeen uses Flop for 10 damage!
+[Turn 14] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 14] Goldeen can use Flop (has sufficient energy)
+[Turn 14] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 14] Kimberly chose action: end_turn
+[Turn 14]     Stewart - Active Pokemon: Paras (60/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 14]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 14] Starting turn 15 for Stewart
+[Turn 15] Stewart draws a card. Hand size: 8
+[Turn 15] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 15] Paras can use Scratch (has sufficient energy)
+[Turn 15] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 15] Stewart chose action: end_turn
+[Turn 15]     Stewart - Active Pokemon: Paras (60/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 15]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 15] Starting turn 16 for Kimberly
+[Turn 16] Kimberly draws a card. Hand size: 9
+[Turn 16] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 16] Goldeen can use Flop (has sufficient energy)
+[Turn 16] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 16] Kimberly chose action: pokemon_action
+[Turn 16] Kimberly chose Pokemon for action: Goldeen
+[Turn 16] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 16] Goldeen can use Flop (has sufficient energy)
+[Turn 16] Goldeen uses Flop for 10 damage!
+[Turn 16] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 16] Goldeen can use Flop (has sufficient energy)
+[Turn 16] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 16] Kimberly chose action: pokemon_action
+[Turn 16] Kimberly chose Pokemon for action: Staryu
+[Turn 16] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 16] Goldeen can use Flop (has sufficient energy)
+[Turn 16] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 16] Kimberly chose action: pokemon_action
+[Turn 16] Kimberly chose Pokemon for action: Horsea
+[Turn 16] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 16] Goldeen can use Flop (has sufficient energy)
+[Turn 16] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 16] Kimberly chose action: end_turn
+[Turn 16]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 16]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 16] Starting turn 17 for Stewart
+[Turn 17] Stewart draws a card. Hand size: 9
+[Turn 17] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 17] Paras can use Scratch (has sufficient energy)
+[Turn 17] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 17] Stewart chose action: end_turn
+[Turn 17]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 17]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 17] Starting turn 18 for Kimberly
+[Turn 18] Kimberly draws a card. Hand size: 10
+[Turn 18] Checking Goldeen attack Flop (ID: attack_65) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 18] Goldeen can use Flop (has sufficient energy)
+[Turn 18] Possible actions for Kimberly: ['end_turn', 'pokemon_action']
+[Turn 18] Kimberly chose action: end_turn
+[Turn 18]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 18]     Kimberly - Active Pokemon: Goldeen (30/60); Benched Pokemon: Horsea (60/60), Magikarp (30/30), Staryu (50/50)
+[Turn 18] Starting turn 19 for Stewart
+[Turn 19] Stewart draws a card. Hand size: 10
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 19] Stewart chose action: pokemon_action
+[Turn 19] Stewart chose Pokemon for action: Venonat
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 19] Stewart chose action: pokemon_action
+[Turn 19] Stewart chose Pokemon for action: Scyther
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 19] Stewart chose action: pokemon_action
+[Turn 19] Stewart chose Pokemon for action: Paras
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Paras uses Scratch for 30 damage!
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 19] Stewart chose action: pokemon_action
+[Turn 19] Stewart chose Pokemon for action: Paras
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Paras uses Scratch for 30 damage!
+[Turn 19] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 19] Paras can use Scratch (has sufficient energy)
+[Turn 19] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 19] Stewart chose action: end_turn
+[Turn 19]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 19]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50)
+[Turn 19] Starting turn 20 for Kimberly
+[Turn 20] Kimberly draws a card. Hand size: 11
+[Turn 20] Checking Horsea attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 20] Horsea cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 20] Possible actions for Kimberly: ['end_turn', 'play_card']
+[Turn 20] Kimberly chose action: play_card
+[Turn 20] Checking Horsea attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 20] Horsea cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 20] Possible actions for Kimberly: ['end_turn']
+[Turn 20] Kimberly chose action: end_turn
+[Turn 20]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 20]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 20] Starting turn 21 for Stewart
+[Turn 21] Stewart draws a card. Hand size: 11
+[Turn 21] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 21] Paras can use Scratch (has sufficient energy)
+[Turn 21] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 21] Stewart chose action: pokemon_action
+[Turn 21] Stewart chose Pokemon for action: Scyther
+[Turn 21] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 21] Paras can use Scratch (has sufficient energy)
+[Turn 21] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 21] Stewart chose action: end_turn
+[Turn 21]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 21]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 21] Starting turn 22 for Kimberly
+[Turn 22] Kimberly draws a card. Hand size: 11
+[Turn 22] Checking Horsea attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 22] Horsea cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 22] Possible actions for Kimberly: ['end_turn']
+[Turn 22] Kimberly chose action: end_turn
+[Turn 22]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 22]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 22] Starting turn 23 for Stewart
+[Turn 23] Stewart draws a card. Hand size: 12
+[Turn 23] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 23] Paras can use Scratch (has sufficient energy)
+[Turn 23] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 23] Stewart chose action: pokemon_action
+[Turn 23] Stewart chose Pokemon for action: Scyther
+[Turn 23] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 23] Paras can use Scratch (has sufficient energy)
+[Turn 23] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 23] Stewart chose action: end_turn
+[Turn 23]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 23]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 23] Starting turn 24 for Kimberly
+[Turn 24] Kimberly draws a card. Hand size: 12
+[Turn 24] Checking Horsea attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 24] Horsea cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 24] Possible actions for Kimberly: ['end_turn']
+[Turn 24] Kimberly chose action: end_turn
+[Turn 24]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 24]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 24] Starting turn 25 for Stewart
+[Turn 25] Stewart draws a card. Hand size: 13
+[Turn 25] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 25] Paras can use Scratch (has sufficient energy)
+[Turn 25] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 25] Stewart chose action: end_turn
+[Turn 25]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 25]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 25] Starting turn 26 for Kimberly
+[Turn 26] Kimberly draws a card. Hand size: 13
+[Turn 26] Checking Horsea attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 26] Horsea cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 26] Possible actions for Kimberly: ['end_turn']
+[Turn 26] Kimberly chose action: end_turn
+[Turn 26]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 26]     Kimberly - Active Pokemon: Horsea (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50), Squirtle (60/60)
+[Turn 26] Starting turn 27 for Stewart
+[Turn 27] Stewart draws a card. Hand size: 14
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 27] Stewart chose action: pokemon_action
+[Turn 27] Stewart chose Pokemon for action: Scyther
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 27] Stewart chose action: pokemon_action
+[Turn 27] Stewart chose Pokemon for action: Paras
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Paras uses Scratch for 30 damage!
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 27] Stewart chose action: pokemon_action
+[Turn 27] Stewart chose Pokemon for action: Scyther
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 27] Stewart chose action: pokemon_action
+[Turn 27] Stewart chose Pokemon for action: Paras
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Paras uses Scratch for 30 damage!
+[Turn 27] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 27] Paras can use Scratch (has sufficient energy)
+[Turn 27] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 27] Stewart chose action: end_turn
+[Turn 27]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 27]     Kimberly - Active Pokemon: Squirtle (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50)
+[Turn 27] Starting turn 28 for Kimberly
+[Turn 28] Kimberly draws a card. Hand size: 14
+[Turn 28] Checking Squirtle attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 28] Squirtle cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 28] Possible actions for Kimberly: ['end_turn', 'play_card']
+[Turn 28] Kimberly chose action: end_turn
+[Turn 28]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 28]     Kimberly - Active Pokemon: Squirtle (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50)
+[Turn 28] Starting turn 29 for Stewart
+[Turn 29] Stewart draws a card. Hand size: 15
+[Turn 29] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 29] Paras can use Scratch (has sufficient energy)
+[Turn 29] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 29] Stewart chose action: end_turn
+[Turn 29]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 29]     Kimberly - Active Pokemon: Squirtle (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50)
+[Turn 29] Starting turn 30 for Kimberly
+[Turn 30] Kimberly draws a card. Hand size: 15
+[Turn 30] Checking Squirtle attack Water Gun (ID: attack_98) - needs {'fire': 0, 'water': 1, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 30] Squirtle cannot use Water Gun - needs {'water': 1}, has {}
+[Turn 30] Possible actions for Kimberly: ['end_turn', 'play_card']
+[Turn 30] Kimberly chose action: end_turn
+[Turn 30]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 30]     Kimberly - Active Pokemon: Squirtle (30/60); Benched Pokemon: Magikarp (30/30), Staryu (50/50)
+[Turn 30] Starting turn 31 for Stewart
+[Turn 31] Stewart draws a card. Hand size: 16
+[Turn 31] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 31] Paras can use Scratch (has sufficient energy)
+[Turn 31] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 31] Stewart chose action: pokemon_action
+[Turn 31] Stewart chose Pokemon for action: Paras
+[Turn 31] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 31] Paras can use Scratch (has sufficient energy)
+[Turn 31] Paras uses Scratch for 30 damage!
+[Turn 31] Checking Paras attack Scratch (ID: attack_549) - needs {'fire': 0, 'water': 0, 'rock': 0, 'grass': 1, 'normal': 1, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0, 'fairy': 0}
+[Turn 31] Paras can use Scratch (has sufficient energy)
+[Turn 31] Possible actions for Stewart: ['end_turn', 'pokemon_action']
+[Turn 31] Stewart chose action: end_turn
+[Turn 31]     Stewart - Active Pokemon: Paras (50/70); Benched Pokemon: Scyther (70/70), Venonat (60/60), Scyther (70/70)
+[Turn 31]     Kimberly - Active Pokemon: Magikarp (30/30); Benched Pokemon: Staryu (50/50)
+[Turn 31] Battle complete! Winner: Kimberly
+
+--------------------------------
+
+Stewart's Deck Contents:
+
+Pokemon Cards:
+  - Bellsprout (ID: a1-018, Type: grass, HP: 60)
+  - Bellsprout (ID: a1-018, Type: grass, HP: 60)
+  - Bulbasaur (ID: a1-001, Type: grass, HP: 70)
+  - Bulbasaur (ID: a1-001, Type: grass, HP: 70)
+  - Exeggcute (ID: a1-021, Type: grass, HP: 50)
+  - Exeggcute (ID: a1-021, Type: grass, HP: 50)
+  - Kakuna (ID: a1-009, Type: grass, HP: 80)
+  - Kakuna (ID: a1-009, Type: grass, HP: 80)
+  - Kakuna (ID: a1-009, Type: grass, HP: 80)
+  - Metapod (ID: a1-006, Type: grass, HP: 80)
+  - Metapod (ID: a1-006, Type: grass, HP: 80)
+  - Oddish (ID: a1-011, Type: grass, HP: 60)
+  - Oddish (ID: a1-011, Type: grass, HP: 60)
+  - Paras (ID: a1-014, Type: grass, HP: 70)
+  - Paras (ID: a1-014, Type: grass, HP: 70)
+  - Scyther (ID: a1-025, Type: grass, HP: 70)
+  - Scyther (ID: a1-025, Type: grass, HP: 70)
+  - Venonat (ID: a1-016, Type: grass, HP: 60)
+  - Venonat (ID: a1-016, Type: grass, HP: 60)
+  - Weedle (ID: a1-008, Type: grass, HP: 50)
+
+Item Cards:
+
+Trainer Cards:
+
+--------------------------------
+
+Kimberly's Deck Contents:
+
+Pokemon Cards:
+  - Goldeen (ID: a1-072, Type: water, HP: 60)
+  - Goldeen (ID: a1-072, Type: water, HP: 60)
+  - Horsea (ID: a1-070, Type: water, HP: 60)
+  - Horsea (ID: a1-070, Type: water, HP: 60)
+  - Krabby (ID: a1-068, Type: water, HP: 70)
+  - Krabby (ID: a1-068, Type: water, HP: 70)
+  - Magikarp (ID: a1-077, Type: water, HP: 30)
+  - Magikarp (ID: a1-077, Type: water, HP: 30)
+  - Poliwag (ID: a1-059, Type: water, HP: 60)
+  - Poliwag (ID: a1-059, Type: water, HP: 60)
+  - Seel (ID: a1-064, Type: water, HP: 80)
+  - Seel (ID: a1-064, Type: water, HP: 80)
+  - Shellder (ID: a1-066, Type: water, HP: 60)
+  - Shellder (ID: a1-066, Type: water, HP: 60)
+  - Squirtle (ID: a1-053, Type: water, HP: 60)
+  - Squirtle (ID: a1-053, Type: water, HP: 60)
+  - Staryu (ID: a1-074, Type: water, HP: 50)
+  - Staryu (ID: a1-074, Type: water, HP: 50)
+  - Tentacool (ID: a1-062, Type: water, HP: 60)
+  - Tentacool (ID: a1-062, Type: water, HP: 60)
+
+Item Cards:
+
+Trainer Cards:
+
+===== SIMULATION RESULTS =====
+Total simulations: 1
+Matchup: basic_grass_deck vs basic_water_deck
+
+Results by player:
+  Kimberly (basic_water_deck): 1 wins (100.0%)
+===============================

@@ -1,10 +1,11 @@
 class Item:
-    def __init__(self, item_id, name, effect, special_values=None):
+    def __init__(self, item_id, name, effect, special_values=None, handler=None):
         self.card_type = "item"
         self.item_id = item_id
         self.name = name
         self.effect = effect
         self.special_values = special_values
+        self.handler = handler
 
     def __str__(self):
         return f"{self.name} ({self.effect})"

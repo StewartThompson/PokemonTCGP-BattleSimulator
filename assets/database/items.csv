@@ -1,7 +1,0 @@
-ID,Name,Description,effect_type,special values
-1,Potion,Heal 20 damage from 1 of your Pokemon.,heal,20|any
-2,X Speed,"During this turn, the Retreat Cost of your Active Pokemon is 1 less.",retreat_reduced_cost,1
-3,Hand Scope,Your opponent reveals their hand.,opponent_reveal_hand,
-4,Pokédex,Look at the top 3 cards of your deck.,look_at_deck,top|3
-5,Poké Ball,Put 1 random Basic Pokemon from your deck into your hand.,find_random_pokemon_at_stage,basic|1
-6,Red Card,Your opponent shuffles their hand into their deck and draws 3 cards.,shuffle_hand_and_draw,3|enemy

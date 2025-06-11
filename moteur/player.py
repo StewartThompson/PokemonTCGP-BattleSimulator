@@ -15,37 +15,54 @@ class Player:
         self.cards_in_hand = []
         self.active_pokemon: Pokemon = None
         self.bench_pokemons = []
+        self.discard_pile = []
+        self.prize_points = 0
+        self.can_play_trainer = True
+        self.energy_points = 10
         if chosen_energies:
             self.chosen_energies = chosen_energies
         else:
             self.chosen_energies = []
 
         self.energy_pile = []
+        self.energy_zone = []  # Energy Zone for PTCGP mechanics
+        self.deck_energy_types = []  # Energy types available for this player's deck
         self.agent: Agent = agent(self) if agent else random_agent.RandomAgent(self)
+        
     def reset_deck(self):
         deck_reset = []
         for card in self.deck:
             if card.card_type == "pokemon":
                 card.current_hp = card.max_hp
-                card.tool_id = None
+                card.attached_tool = None
                 for energy_type in card.equipped_energies:
                     card.equipped_energies[energy_type] = 0
                 card.effect_status = []
-                card.turn_since_placement = 1
                 card.used_ability_this_turn = False
                 card.damage_nerf = 0
                 card.hiding = False
-                new_card = Pokemon(card.card_id, card.name, card.stage, card.attack_ids, card.ability_id, card.max_hp, card.pre_evolution_name, card.evolutions_name, card.pokemon_type, card.weakness, card.retreat_cost)
-                deck_reset.append(new_card)
-            elif card.card_type == "item":
-                deck_reset.append(Item(card.item_id, card.name, card.effect, card.special_values))
+                card.can_retreat = True
+                card.ability_used = False
+                card.turn_since_placement = 1
+                deck_reset.append(card)
             else:
-                deck_reset.append(Trainer(card.trainer_id, card.name, card.effect, card.special_values))
+                deck_reset.append(card)
         self.deck = deck_reset
-
+        self.cards_in_hand = []
+        self.discard_pile = []
+        self.bench_pokemons = []
+        self.active_pokemon = None
+        self.prize_points = 0
 
     def set_deck(self, deck):
-        self.deck = deck
+        # Filter out None values from the deck
+        valid_deck = [card for card in deck if card is not None]
+        none_count = len(deck) - len(valid_deck)
+        
+        if none_count > 0:
+            print(f"Warning: Removed {none_count} None cards from {self.name}'s deck")
+        
+        self.deck = valid_deck
         self.chosen_energies = []
         for card in self.deck:
             if type(card) is Pokemon and card.pokemon_type != "normal":
@@ -86,5 +103,27 @@ class Player:
     def refill_energy(self):
         for i in range(100):
             self.energy_pile.append(random.choice(self.chosen_energies))
+
+    def all_pokemons(self):
+        """Return a list of all active and bench Pokémon belonging to this player."""
+        pokemons = []
+        if self.active_pokemon:
+            pokemons.append(self.active_pokemon)
+        if self.bench_pokemons:
+            pokemons.extend(self.bench_pokemons)
+        return pokemons
+
+    def has_pokemons(self):
+        """Check if player has any Pokémon left."""
+        return self.active_pokemon is not None or len(self.bench_pokemons) > 0
+
+    def reset_effects(self):
+        """Reset temporary effects on all Pokémon."""
+        for pokemon in self.all_pokemons():
+            # Reset any temporary effects
+            pokemon.damage_nerf = 0
+            pokemon.hiding = False
+            if hasattr(pokemon, 'used_ability_this_turn'):
+                pokemon.used_ability_this_turn = False
 
 

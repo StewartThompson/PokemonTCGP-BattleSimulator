@@ -23,6 +23,8 @@ class JsonCardImporter:
 
         self.abilities = {}
         self.attacks = {}
+
+        # Card types
         self.items = {}
         self.pokemon = {}
         self.supporters = {}
@@ -72,7 +74,6 @@ class JsonCardImporter:
         print(f"Found {len(cards_data)} total cards to process...")
         
         # Process each card
-        processed_count = 0
         for card_data in cards_data:
             try:
                 card_type = card_data.get('type', '').lower()
@@ -295,7 +296,7 @@ class JsonCardImporter:
             name=card_data.get('name'),
             type=card_data.get('type'),
             subtype=card_data.get('subtype'),
-            health=40 if card_data.get('health') is None else card_data.get('health'),
+            health= 40 if card_data.get('health') is None else card_data.get('health'),
             set=card_data.get('set'),
             pack=card_data.get('pack'),
             abilities=abilities,
@@ -346,45 +347,9 @@ class JsonCardImporter:
         
         print(f"Set {evolution_count} evolution relationships")
 
-    def print_sample_objects(self, limit=3):
-        """Print sample objects for debugging"""
-        print(f"\n=== SAMPLE OBJECTS ===")
-        
-        # Sample Pokemon
-        print(f"\nSAMPLE POKEMON ({limit}):")
-        for i, (card_id, pokemon) in enumerate(list(self.pokemon.items())[:limit]):
-            print(f"  {i+1}. {pokemon}")
-        
-        # Sample Tools (if any)
-        if self.tools:
-            print(f"\nSAMPLE TOOLS ({limit}):")
-            for i, (tool_id, tool) in enumerate(list(self.tools.items())[:limit]):
-                print(f"  {i+1}. {tool}")
-                
-        # Sample Items (if any)
-        if self.items:
-            print(f"\nSAMPLE ITEMS ({limit}):")
-            for i, (item_id, item) in enumerate(list(self.items.items())[:limit]):
-                print(f"  {i+1}. {item}")
-                
-        # Sample Supporters (if any)
-        if self.supporters:
-            print(f"\nSAMPLE SUPPORTERS ({limit}):")
-            for i, (supporter_id, supporter) in enumerate(list(self.supporters.items())[:limit]):
-                print(f"  {i+1}. {supporter}")
-                
-        # Sample Fossils (if any)
-        if self.fossils:
-            print(f"\nSAMPLE FOSSILS ({limit}):")
-            for i, (fossil_id, fossil) in enumerate(list(self.fossils.items())[:limit]):
-                print(f"  {i+1}. {fossil}")
-
 
 # Example usage
 if __name__ == "__main__":
     # Create importer and import cards
     importer = JsonCardImporter()
     importer.import_from_json()
-    
-    # Print sample objects for verification
-    importer.print_sample_objects(limit=3)

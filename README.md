@@ -27,6 +27,9 @@ A Python-based Pokémon TCG Pocket Battle Simulator designed for running automat
   - [Developing AI/Bots](#developing-aibots)
 - [Future Enhancements](#future-enhancements)
 - [Contributing](#contributing)
+- [Code Refactoring](#code-refactoring)
+- [Decks](#decks)
+  - [Creating Custom Decks](#creating-custom-decks)
 
 ## Features
 
@@ -51,8 +54,16 @@ PokemonTCGP-BattleSimulator/
 │       ├── pokemons.csv
 │       └── trainers.csv
 └── moteur/
-    ├── match.py            # Core game logic and match orchestration
+    ├── match.py            # Main game module that imports other components
     ├── player.py           # Player class, manages player state
+    ├── core/
+    │   ├── __init__.py
+    │   ├── match.py        # Core game logic and match orchestration
+    │   ├── turn_state.py   # Manages state for a single turn
+    │   └── player_extensions.py # Extensions for the Player class
+    ├── handlers/
+    │   ├── __init__.py
+    │   └── card_effect_handler.py # Handles effects for abilities, attacks, etc.
     ├── cartes/
     │   ├── item.py
     │   ├── pokemon.py
@@ -306,3 +317,72 @@ Sur le serveur, tu trouveras des catégories pour des informations importantes, 
 Au plaisir de te voir bientôt !
 
 https://discord.gg/pzd7dJS72t
+
+## Code Refactoring
+
+The codebase has been refactored to improve maintainability and organization:
+
+1. **Core Modules**:
+   - `moteur/core/match.py`: Main game logic
+   - `moteur/core/turn_state.py`: Tracks state within a turn
+   - `moteur/core/player_extensions.py`: Extensions for the Player class
+
+2. **Handler Modules**:
+   - `moteur/handlers/card_effect_handler.py`: Handles card effects and abilities
+
+3. **Wrapper Module**:
+   - `moteur/match.py`: A simple wrapper that imports the refactored modules
+
+This refactoring separates concerns and makes the code more maintainable while preserving the original functionality.
+
+## Decks
+
+Decks are defined in separate Python files within the `decks/` directory, making them easy to create, modify, and share. Each deck file exports:
+
+1. `get_deck()` - Returns a list of cards comprising the deck
+2. `get_description()` - Returns metadata about the deck (name, type, strategy)
+
+Example of importing and using decks:
+
+```python
+import decks
+
+# List all available decks
+available_decks = decks.load_all_decks()
+print(available_decks)  # {'pikachu_deck': {'name': 'Pikachu Deck', ...}, ...}
+
+# Get a specific deck
+pikachu_deck = decks.get_deck('pikachu_deck')
+```
+
+### Creating Custom Decks
+
+To create a new deck:
+
+1. Create a new Python file in the `decks/` directory (e.g., `decks/my_custom_deck.py`)
+2. Define the required functions:
+
+```python
+from utils import all_pokemons, all_items, all_trainers
+
+def get_deck():
+    """Returns the cards in this deck."""
+    return [
+        # Pokémon
+        all_pokemons[123], all_pokemons[123],  # Example Pokémon
+        # Items
+        all_items[1], all_items[2],
+        # Trainers
+        all_trainers[5]
+    ]
+
+def get_description():
+    """Returns a description of the deck."""
+    return {
+        "name": "My Custom Deck",
+        "type": "Fire",  # Primary energy type
+        "strategy": "Description of the deck's strategy"
+    }
+```
+
+Once created, your deck will be automatically available through the `decks` module and in the command line interface.
