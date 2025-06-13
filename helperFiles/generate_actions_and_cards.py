@@ -70,9 +70,15 @@ def build_actions_mapping(cards: List[dict], existing: Dict[str, int]) -> Dict[s
 
     # Process in sorted order for deterministic output
     for card in sorted(cards, key=lambda c: c["id"]):
-        # Add play basic pokemon IDs
-        for action_id in ActionIdGenerator.get_all_action_ids(card):
-            add(action_id)
+        try:
+            # Add play basic pokemon IDs
+            for action_id in ActionIdGenerator.get_all_action_ids(card):
+                add(action_id)
+        except Exception as e:
+            logging.error(f"⚠️ Error processing card {card.get('name', card.get('id', 'Unknown'))}: {str(e)}")
+            # Print the full error for debugging
+            import traceback
+            logging.debug(traceback.format_exc())
 
     return mapping
 
@@ -125,7 +131,16 @@ def main():
         default=[Path("v2/assets/cards/a1-genetic-apex.json")],
         help="Card JSON files to process",
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Enable debug logging"
+    )
     args = parser.parse_args()
+
+    # Configure logging
+    log_level = logging.DEBUG if args.debug else logging.INFO
+    logging.basicConfig(format="%(message)s", level=log_level)
 
     # Load and merge all card JSONs
     cards = []
@@ -148,5 +163,4 @@ def main():
     write_mapping(mapping, cards_py, "CARD_IDS")
 
 if __name__ == "__main__":
-    logging.basicConfig(format="%(message)s", level=logging.INFO)
     main() 

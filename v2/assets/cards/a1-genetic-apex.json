@@ -5741,7 +5741,7 @@
       "set": "Genetic Apex (A1)",
       "pack": "Pikachu",
       "attacks": [],
-      "retreatCost": null,
+      "retreatCost": 999,
       "weakness": null,
       "abilities": [ 
         {
@@ -5763,7 +5763,7 @@
       "set": "Genetic Apex (A1)",
       "pack": "Charizard",
       "attacks": [],
-      "retreatCost": null,
+      "retreatCost": 999,
       "weakness": null,
       "abilities": [
         {
@@ -5785,7 +5785,7 @@
       "set": "Genetic Apex (A1)",
       "pack": "Mewtwo",
       "attacks": [],
-      "retreatCost": null,
+      "retreatCost": 999,
       "weakness": null,
       "abilities": [
         {

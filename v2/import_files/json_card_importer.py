@@ -130,24 +130,27 @@ class JsonCardImporter:
             
         return energy_cost
 
-    def create_attack(self, attack_data: dict) -> CardAttack:
+    def create_attack(self, attack_data: dict, card_data: dict) -> CardAttack:
         """Create an Attack object"""
+        attack_id = ActionIdGenerator.get_attack_id(card_data, attack_data)
+
         self.attack_counter += 1
         return CardAttack(
+            id=attack_id,
             name=attack_data.get('name', ''),
             effect=attack_data.get('effect', ''),
             damage=attack_data.get('damage', '0'),
-            cost=self.parse_energy_cost(attack_data.get('cost', [])),
-            handler=attack_data.get('handler', '')
+            cost=self.parse_energy_cost(attack_data.get('cost', []))
         )
 
-    def create_ability(self, ability_data: dict) -> Ability:
+    def create_ability(self, ability_data: dict, card_data: dict) -> Ability:
         """Create an Ability object"""
+        ability_id = ActionIdGenerator.get_ability_id(card_data, ability_data)
         self.ability_counter += 1
         return Ability(
+            id=ability_id,
             name=ability_data.get('name', ''),
-            effect=ability_data.get('effect', ''),
-            handler=ability_data.get('handler', '')
+            effect=ability_data.get('effect', '')
         )
 
     def create_pokemon(self, card_data: dict) -> Pokemon:
@@ -155,14 +158,14 @@ class JsonCardImporter:
         # Handle attacks
         attacks = []
         for attack_data in card_data.get('attacks', []):
-            attack = self.create_attack(attack_data)
+            attack = self.create_attack(attack_data, card_data)
             attacks.append(attack)
         
         # Handle abilities
         abilities = []
         abilities_list = card_data.get('abilities', [])
         for ability_data in abilities_list:
-            ability = self.create_ability(ability_data)
+            ability = self.create_ability(ability_data, card_data)
             abilities.append(ability)
 
         
@@ -170,10 +173,10 @@ class JsonCardImporter:
         element = card_data.get('element')
         weakness_type = card_data.get('weakness')
 
-        if element not in self.energy_mapping:
+        if element not in self.energy_mapping and card_data.get('subtype') != 'Fossil':
             raise ValueError(f"Unknown element type: {element}")
         
-        pokemon_type = self.energy_mapping[element]
+        pokemon_type = self.energy_mapping.get(element) if element else None
         weakness = self.energy_mapping.get(weakness_type) if weakness_type else None
 
         subtype = card_data.get('subtype')
@@ -214,7 +217,7 @@ class JsonCardImporter:
         abilities = []
         abilities_list = card_data.get('abilities', [])
         for ability_data in abilities_list:
-            ability = self.create_ability(ability_data)
+            ability = self.create_ability(ability_data, card_data)
             abilities.append(ability)
 
         action_ids = []
@@ -243,7 +246,7 @@ class JsonCardImporter:
         abilities = []
         abilities_list = card_data.get('abilities', [])
         for ability_data in abilities_list:
-            ability = self.create_ability(ability_data)
+            ability = self.create_ability(ability_data, card_data)
             abilities.append(ability)
         
         action_ids = []
@@ -272,7 +275,7 @@ class JsonCardImporter:
         abilities = []
         abilities_list = card_data.get('abilities', [])
         for ability_data in abilities_list:
-            ability = self.create_ability(ability_data)
+            ability = self.create_ability(ability_data, card_data)
             abilities.append(ability)
 
         action_ids = []

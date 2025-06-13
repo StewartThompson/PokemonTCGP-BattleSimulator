@@ -1,6 +1,6 @@
 # These are the attacks that a pokemon can use
 class Attack:
-    def __init__(self, id, name, effect, damage, cost=None, handler=None):
+    def __init__(self, id, name, effect, damage, cost=None):
         self.id = id
         self.name = name
         self.effect = effect

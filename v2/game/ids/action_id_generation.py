@@ -18,21 +18,21 @@ class ActionIdGenerator:
         return words[0].lower() + "".join(w.capitalize() for w in words[1:])
 
     @staticmethod
-    def attack_id(card: dict, attack: dict) -> str:
+    def get_attack_id(card: dict, attack: dict) -> str:
         """Generate a unique ID for an attack action.
         Format: {cardId}_{pokemonName}_{attackName}_{position}_{target}
         """
-        position = attack.get("position", "active")
-        target = attack.get("target", "active")
+        position = attack.get("position", "pActive")
+        target = attack.get("target", "oActive")
         return f"{card['id']}_{ActionIdGenerator._to_camel_case(card['name'])}_{ActionIdGenerator._to_camel_case(attack['name'])}_{position}_{target}"
 
     @staticmethod
-    def ability_id(card: dict, ability: dict) -> str:
+    def get_ability_id(card: dict, ability: dict) -> str:
         """Generate a unique ID for an ability action.
         Format: {cardId}_{pokemonName}_{abilityName}_{position}_{target}
         """
-        position = ability.get("position", "active") 
-        target = ability.get("target", "active")
+        position = ability.get("position", "pActive") 
+        target = ability.get("target", "oActive")
         return f"{card['id']}_{ActionIdGenerator._to_camel_case(card['name'])}_{ActionIdGenerator._to_camel_case(ability['name'])}_{position}_{target}"
 
     @staticmethod
@@ -64,15 +64,23 @@ class ActionIdGenerator:
         Format: {cardId}_{spot}_playBasicPokemon
         Returns empty list if card is not a basic pokemon.
         """
-        if card.get("subtype") != "Basic":
-            return []
         base = f"play_{ActionIdGenerator._to_camel_case(card['name'])}"
-        return [
-            f"{card['id']}_a_{base}",
-            f"{card['id']}_b1_{base}",
-            f"{card['id']}_b2_{base}",
-            f"{card['id']}_b3_{base}"
-        ]
+        # Handle both Basic Pokemon and Fossil cards that act as Basic Pokemon
+        if card.get("subtype") == "Basic":
+           return [
+                f"{card['id']}_a_{base}",
+                f"{card['id']}_b1_{base}",
+                f"{card['id']}_b2_{base}",
+                f"{card['id']}_b3_{base}"
+            ]
+        elif card.get("subtype") == "Fossil":
+            return [
+                f"{card['id']}_b1_{base}",
+                f"{card['id']}_b2_{base}",
+                f"{card['id']}_b3_{base}"
+            ]
+        else:
+            return []
     
     @staticmethod
     def get_all_action_ids(card: dict) -> List[str]:
@@ -80,21 +88,21 @@ class ActionIdGenerator:
         ids = []
 
         # Add play basic pokemon IDs
-        ids.extend(ActionIdGenerator.play_basic_pokemon_ids(card))
-
         # Add evolution trigger IDs 
-        ids.extend(ActionIdGenerator.evolution_ids(card))
+        if (card.get('type') == 'Pokemon'):
+            ids.extend(ActionIdGenerator.play_basic_pokemon_ids(card))
+            ids.extend(ActionIdGenerator.evolution_ids(card))
 
         # Add ability IDs
         for ability in card.get("abilities", []):
-            ids.append(ActionIdGenerator.ability_id(card, ability))
+            ids.append(ActionIdGenerator.get_ability_id(card, ability))
 
         # Add attack IDs
         for attack in card.get("attacks", []):
-            ids.append(ActionIdGenerator.attack_id(card, attack))
+            ids.append(ActionIdGenerator.get_attack_id(card, attack))
 
-        # Add retreat ID
-        ids.append(ActionIdGenerator.retreat_id(card))
+        if (card.get('type') == 'Pokemon' and card.get("subtype") != "Fossil"):
+            ids.append(ActionIdGenerator.retreat_id(card))
 
         return ids
 
