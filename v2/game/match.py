@@ -9,6 +9,7 @@ from .load_deck import DeckLoader
 from .player import Player
 from v2.agents.human_agent import HumanAgent
 from v2.agents.random_agent import RandomAgent
+from cards.pokemon import Pokemon
 
 class Match:
     """Simple match class that takes two Player objects"""
@@ -30,9 +31,9 @@ class Match:
         """Get possible attacks for a pokemon"""
         return pokemon.get_possible_attacks()
     
-    def get_state(self):
+    def get_player_state(self, player: Player):
         """Get the state of the match"""
-        return self.player1.get_state(), self.player2.get_state()
+        return self.player1.get_state()
 
 def main():
     parser = argparse.ArgumentParser(description="Pokemon Match Simulator")

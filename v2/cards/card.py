@@ -1,7 +1,7 @@
 # This is the superclass for all cards
 
 class Card:
-    def __init__(self, id, name, type, subtype, set, pack, rarity):
+    def __init__(self, id, name, type, subtype, set, pack, rarity, action_ids):
         self.id = id
         self.name = name
         self.type = type
@@ -9,3 +9,5 @@ class Card:
         self.set = set
         self.pack = pack
         self.rarity = rarity
+
+        self.action_ids = []

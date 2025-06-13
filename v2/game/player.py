@@ -1,7 +1,7 @@
 from v2.agents.random_agent import RandomAgent
 
 import random
-from agents import random_agent
+from v2.agents import bot_agent
 from cards.pokemon import Pokemon
 from cards.fossil import Fossil
 
@@ -10,13 +10,13 @@ class Player:
         self.name = name
         self.deck = deck
         self.chosen_energies = []
-        self.agent = agent(self) if agent else random_agent.RandomAgent(self)
+        self.agent = agent(self) if agent else bot_agent.RandomAgent(self)
 
         # These values are game values for the player
         self.points = 0
         self.cards_in_hand = []
         self.active_pokemon: Pokemon | Fossil = None
-        self.bench_pokemons = []
+        self.bench_pokemons: list[Pokemon | Fossil] = [None, None, None]
         self.discard_pile = []
         self.prize_points = 0
         self.can_play_trainer = True

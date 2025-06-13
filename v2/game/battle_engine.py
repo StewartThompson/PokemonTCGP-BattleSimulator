@@ -14,7 +14,7 @@ from import_files.card_loader import CardLoader
 from game.player import Player
 from cards.pokemon import Pokemon
 from cards.card import Card
-from v2.agents.bot_agent import RandomAgent
+from v2.agents.random_agent import RandomAgent
 from v2.game.ids.state import *  # Import all state constants
 from v2.game.ids.energy import ENERGY_TYPES
 from v2.game.ids.stages import STAGES
@@ -77,16 +77,6 @@ class BattleEngine:
     
     #### PRIVATE METHODS ####
 
-    def get_state(self, player: Player) -> List[float]:
-        """Get the state for the player"""
-        self.state[active_pokemon_id] = player.active_pokemon.id if player.active_pokemon else 0
-        self.state[player_hp_active_pokemon] = player.active_pokemon.get_hp() if player.active_pokemon else 0
-        self.state[player_damage_active_pokemon] = player.active_pokemon.damage_taken if player.active_pokemon else 0
-        self.state[player_poketool_id_active_pokemon] = player.active_pokemon.poketool.id if player.active_pokemon else 0
-        self.state[player_active_pokemon_point] = player.active_pokemon.point if player.active_pokemon else 0
-        # Get the state for the player
-        return self._get_state(player)
-    
     def _setup_game(self):
         """Initialize game state"""
         self.log("Setting up battle...")
@@ -127,7 +117,6 @@ class BattleEngine:
         actions = self._get_actions(state)
 
         # Play Action
-
         """Handle turn zero"""
         basic_pokemon = player.get_basic_pokemon()
         active = basic_pokemon[0]
@@ -142,21 +131,10 @@ class BattleEngine:
     def _get_state(self, player: Player) -> Dict[str, Any]:
         # If the player is human, get the state from the human player
         if player.agent.is_human:
-            return player.get_state()
+            return player._get_human_state()
         # If the player is AI, get the state from the AI
         else:
             return self.get_ai_state(player)
-
-    def get_ai_state(self, player: Player) -> List[float]:
-        """Get the AI state as a numerical array"""
-        current_state = self._create_empty_state()
-        
-        # Example of how to populate the state:
-        # current_state[active_pokemon_id] = player.active_pokemon.id if player.active_pokemon else 0
-        # current_state[player_hp_active_pokemon] = player.active_pokemon.hp if player.active_pokemon else 0
-        # current_state[player_damage_active_pokemon] = player.active_pokemon.damage if player.active_pokemon else 0
-        
-        return current_state
 
     def _start_turn_effects(self, player: Player):
         """Handle start-of-turn effects"""
@@ -227,10 +205,13 @@ class BattleEngine:
         """Determine final winner"""
         return
     
+    def _get_human_state(self, player: Player, opponent: Player) -> List[float]:
+        """Get the state for the human player"""
+        # This will be the GUI state that the human player sees
+        return
 
 
-
-    def get_state(self, player: Player, opponent: Player) -> List[float]:
+    def get_ai_state(self, player: Player, opponent: Player) -> List[float]:
         """Get the state for the player"""
         self.state[pa_pokemon_id] = player.active_pokemon.id if player.active_pokemon else 0
         self.state[pa_pokemon_element] = ENERGY_TYPES[player.active_pokemon.element] if player.active_pokemon else 0

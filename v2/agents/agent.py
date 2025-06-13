@@ -1,7 +1,7 @@
 import random
 from typing import List, Dict, Optional
 import numpy as np
-from gym import Env, spaces
+from gymnasium import Env, spaces
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_checker import check_env
 

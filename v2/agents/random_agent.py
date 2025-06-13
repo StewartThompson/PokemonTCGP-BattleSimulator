@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import random
 from sb3_contrib import MaskablePPO
+from agents.agent import Agent
+from typing import Dict, List, Optional
 
 class RandomAgent(Agent):
     """

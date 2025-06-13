@@ -349,7 +349,37 @@
       "attacks": [
         {
           "name": "Volcanic Ash",
-          "effect": "Discard 2 Fire Energy from this Pokémon. This attack does 80 damage to 1 of your opponent's Pokémon.",
+          "effect": "Discard 2 Fire Energy from this Pokémon. This attack does 80 damage to 1 of your opponent's Pokémon. (Active)",
+          "damage": "",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Volcanic Ash",
+          "effect": "Discard 2 Fire Energy from this Pokémon. This attack does 80 damage to 1 of your opponent's Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Volcanic Ash",
+          "effect": "Discard 2 Fire Energy from this Pokémon. This attack does 80 damage to 1 of your opponent's Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Volcanic Ash",
+          "effect": "Discard 2 Fire Energy from this Pokémon. This attack does 80 damage to 1 of your opponent's Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Fire",
@@ -534,7 +564,25 @@
       "attacks": [
         {
           "name": "Aqua Liner",
-          "effect": "This attack does 50 damage to 1 of your opponent's Benched Pokémon.",
+          "effect": "This attack does 50 damage to 1 of your opponent's Benched Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Water",
+            "Water"
+          ]
+        },
+        {
+          "name": "Aqua Liner",
+          "effect": "This attack does 50 damage to 1 of your opponent's Benched Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Water",
+            "Water"
+          ]
+        },
+        {
+          "name": "Aqua Liner",
+          "effect": "This attack does 50 damage to 1 of your opponent's Benched Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Water",
@@ -691,7 +739,34 @@
       "attacks": [
         {
           "name": "Thunder Spear",
-          "effect": "This attack does 40 damage to 1 of your opponent's Pokémon.",
+          "effect": "This attack does 40 damage to 1 of your opponent's Pokémon. (Active)",
+          "damage": "",
+          "cost": [
+            "Lightning",
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 40 damage to 1 of your opponent's Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Lightning",
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 40 damage to 1 of your opponent's Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Lightning",
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 40 damage to 1 of your opponent's Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Lightning",

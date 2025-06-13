@@ -7,14 +7,13 @@ from typing import Dict, List
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from cards.pokemon import Pokemon
-from cards.fossil import Fossil
 from cards.supporter import Supporter
 from cards.tool import Tool
 from cards.item import Item
 # Use a more explicit import to avoid conflicts
 from cards.attack import Attack as CardAttack
 from cards.ability import Ability
-
+from game.ids.action_id_generation import ActionIdGenerator
 
 
 class JsonCardImporter:
@@ -29,7 +28,6 @@ class JsonCardImporter:
         self.pokemon = {}
         self.supporters = {}
         self.tools = {}
-        self.fossils = {}
         
         # Counters for how many of each object we've created
         self.attack_counter = 0
@@ -80,19 +78,14 @@ class JsonCardImporter:
                 card_subtype = card_data.get('subtype', '').lower()
                 
                 # Handle Pokemon cards
-                if card_type == 'pokemon' and card_subtype in ['basic', 'stage 1', 'stage 2']:
+                if card_type == 'pokemon':
                     pokemon = self.create_pokemon(card_data)
                     self.pokemon[pokemon.id] = pokemon
                     
                 # Handle Trainer cards
                 elif card_type == 'trainer':
-                    # Handle Fossil items first since they're a special case
-                    if card_subtype == 'item' and 'fossil' in card_data.get('name', '').lower():
-                        fossil = self.create_fossil(card_data)
-                        self.fossils[fossil.id] = fossil
-                        
                     # Handle regular items
-                    elif card_subtype == 'item':
+                    if card_subtype == 'item':
                         item = self.create_item(card_data)
                         self.items[item.id] = item
                         
@@ -115,7 +108,6 @@ class JsonCardImporter:
         
         print(f"Import complete!")
         print(f"Created {len(self.pokemon)} Pokemon")
-        print(f"Created {len(self.fossils)} fossils")
         print(f"Created {self.attack_counter} unique attacks")
         print(f"Created {self.ability_counter} unique abilities")
         print(f"Created {len(self.supporters)} supporters")
@@ -185,9 +177,13 @@ class JsonCardImporter:
         weakness = self.energy_mapping.get(weakness_type) if weakness_type else None
 
         subtype = card_data.get('subtype')
-        if subtype not in ['Basic', 'Stage 1', 'Stage 2']:
+        if subtype not in ['Basic', 'Stage 1', 'Stage 2', 'Fossil']:
             raise ValueError(f"Unknown stage type: {subtype}")
         stage = subtype.lower().replace(' ', '')
+
+        action_ids = []
+        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+            action_ids.append(action_id)
         
         pokemon = Pokemon(
             id=card_data.get('id'),
@@ -204,7 +200,8 @@ class JsonCardImporter:
             weakness=weakness,
             abilities=abilities,
             evolves_from=card_data.get('evolvesFrom'),
-            rarity=card_data.get('rarity')
+            rarity=card_data.get('rarity'),
+            action_ids=action_ids
         )
         
         return pokemon
@@ -219,6 +216,10 @@ class JsonCardImporter:
         for ability_data in abilities_list:
             ability = self.create_ability(ability_data)
             abilities.append(ability)
+
+        action_ids = []
+        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+            action_ids.append(action_id)
         
         item = Supporter(
             id=card_data.get('id'),
@@ -228,7 +229,8 @@ class JsonCardImporter:
             set=card_data.get('set'),
             pack=card_data.get('pack'),
             rarity=card_data.get('rarity'),
-            abilities=abilities
+            abilities=abilities,
+            action_ids=action_ids
         )
         
         return item
@@ -244,6 +246,10 @@ class JsonCardImporter:
             ability = self.create_ability(ability_data)
             abilities.append(ability)
         
+        action_ids = []
+        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+            action_ids.append(action_id)
+        
         item = Tool(
             id=card_data.get('id'),
             name=card_data.get('name'),
@@ -252,7 +258,8 @@ class JsonCardImporter:
             set=card_data.get('set'),
             pack=card_data.get('pack'),
             rarity=card_data.get('rarity'),
-            abilities=abilities
+            abilities=abilities,
+            action_ids=action_ids
         )
         
         return item
@@ -267,6 +274,10 @@ class JsonCardImporter:
         for ability_data in abilities_list:
             ability = self.create_ability(ability_data)
             abilities.append(ability)
+
+        action_ids = []
+        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+            action_ids.append(action_id)
         
         item = Item(
             id=card_data.get('id'),
@@ -276,36 +287,11 @@ class JsonCardImporter:
             set=card_data.get('set'),
             pack=card_data.get('pack'),
             rarity=card_data.get('rarity'),
-            abilities=abilities
+            abilities=abilities,
+            action_ids=action_ids
         )
         
         return item
-
-    def create_fossil(self, card_data: dict) -> Fossil:
-        """Create a Fossil object from JSON card data"""
-        ability_data = {
-            'name': 'Fossil Ability',
-            'effect': 'Play this card as if it were a 40-HP Basic Colorless Pokemon. At any time during your turn, you may discard this card from play. This card can\'t retreat.',
-            'handler': 'fossil_ability'
-        }
-
-        abilities = [self.create_ability(ability_data)]
-
-        fossil = Fossil(
-            id=card_data.get('id'),
-            name=card_data.get('name'),
-            type=card_data.get('type'),
-            subtype=card_data.get('subtype'),
-            health= 40 if card_data.get('health') is None else card_data.get('health'),
-            set=card_data.get('set'),
-            pack=card_data.get('pack'),
-            abilities=abilities,
-            rarity=card_data.get('rarity')
-        )
-
-        return fossil
-
- 
 
     def initialize_from_folder(self, folder_path: str) -> Dict:
         """Initialize card database from a folder of JSON files"""
@@ -329,8 +315,6 @@ class JsonCardImporter:
         all_cards = {}
         for pokemon in self.pokemon.values():
             all_cards[pokemon.name] = pokemon
-        for fossil in self.fossils.values():
-            all_cards[fossil.name] = fossil
         
         evolution_count = 0
         

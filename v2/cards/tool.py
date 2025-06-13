@@ -2,8 +2,8 @@
 from .card import Card
 
 class Tool(Card):
-    def __init__(self, id, name, type, subtype, set, pack, rarity, abilities):
-        super().__init__(id, name, type, subtype, set, pack, rarity)
+    def __init__(self, id, name, type, subtype, set, pack, rarity, abilities, action_ids):
+        super().__init__(id, name, type, subtype, set, pack, rarity, action_ids)
 
         # If abilities exist, set the first one as the main ability
         if abilities:

@@ -2,9 +2,9 @@
 from .card import Card
 
 class Supporter(Card):
-    def __init__(self, id, name, type, subtype, set, pack, rarity, abilities):
+    def __init__(self, id, name, type, subtype, set, pack, rarity, abilities, action_ids):
         # Call the parent Card constructor
-        super().__init__(id, name, type, subtype, set, pack, rarity)
+        super().__init__(id, name, type, subtype, set, pack, rarity, action_ids)
 
         # If abilities exist, set the first one as the main ability
         if abilities:

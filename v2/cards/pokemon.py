@@ -1,16 +1,19 @@
 from .card import Card
+from .tool import Tool
+from .attack import Attack
+from .ability import Ability
 class Pokemon(Card):
-    def __init__(self, id, name, element, type, subtype, stage, health, set, pack, attacks, retreat_cost, weakness, abilities, evolves_from, rarity):
+    def __init__(self, id, name, element, type, subtype, stage, health, set, pack, attacks, retreat_cost, weakness, abilities, evolves_from, rarity, action_ids):
         # Call the parent Card constructor
-        super().__init__(id, name, type, subtype, set, pack, rarity)
+        super().__init__(id, name, type, subtype, set, pack, rarity, action_ids)
 
         self.element = element
         self.stage = stage
         self.max_hp = health
-        self.attacks = attacks
+        self.attacks: list[Attack] = attacks
         self.retreat_cost = retreat_cost
         self.weakness = weakness
-        self.abilities = abilities
+        self.abilities: list[Ability] = abilities
         self.evolves_from = evolves_from
 
         # Additional inferred variables
@@ -21,12 +24,12 @@ class Pokemon(Card):
         self.evolves_to_ids = []
 
         # Game variables
-        self.attached_tool = None
+        self.poketool: Tool = None
         self.can_retreat = True
         self.damage_nerf = 0
         self.damage_taken = 0
         self.effect_status = []
-        self.equipped_energies = {'fire': 0, 'water': 0, 'rock': 0, 'grass': 0, 'normal': 0, 'electric': 0, 'psychic': 0, 'dark': 0, 'metal': 0, 'dragon': 0}
+        self.equipped_energies = {'grass': 0, 'fire': 0, 'water': 0, 'lightning': 0, 'psychic': 0, 'fighting': 0, 'darkness': 0, 'metal': 0, 'fairy': 0, 'normal': 0}
         self.placed_or_evolved_this_turn = 1
         self.used_ability_this_turn = False
 
