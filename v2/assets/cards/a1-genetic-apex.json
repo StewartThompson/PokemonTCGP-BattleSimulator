@@ -517,15 +517,21 @@
       "abilities": [
         {
           "name": "Fragrance Trap",
-          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 1)"
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 1)",
+          "position": "bench1",
+          "target": "active"
         },
         {
           "name": "Fragrance Trap",
-          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 2)"
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 2)",
+          "position": "bench2",
+          "target": "active"
         },
         {
-          "name": "Fragrance Trap",
-          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 3)"
+          "name": "Fragrance Trap B3",
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 3)",
+          "position": "bench3",
+          "target": "active"
         }
       ],
       "evolvesFrom": "Weepinbell",
@@ -771,7 +777,8 @@
           "cost": [
             "Grass",
             "Grass"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Leaf Supply",
@@ -780,7 +787,8 @@
           "cost": [
             "Grass",
             "Grass"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Leaf Supply",
@@ -789,7 +797,8 @@
           "cost": [
             "Grass",
             "Grass"
-          ]
+          ],
+          "target": "bench3"
         }
       ],
       "retreatCost": 1,
@@ -1238,7 +1247,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Inferno Dance",
@@ -1246,7 +1256,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Inferno Dance",
@@ -1254,7 +1265,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench3"
         },
         {
           "name": "Heat Blast",
@@ -1888,7 +1900,8 @@
             "Water",
             "Water",
             "Water"
-          ]
+          ],
+          "target": "active"
         },
         {
           "name": "Water Arrow",
@@ -1898,7 +1911,8 @@
             "Water",
             "Water",
             "Water"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Water Arrow",
@@ -1908,7 +1922,8 @@
             "Water",
             "Water",
             "Water"
-          ]
+          ],
+          "target": "bench2"
         },        {
           "name": "Water Arrow",
           "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Bench 3)",
@@ -1917,7 +1932,8 @@
             "Water",
             "Water",
             "Water"
-          ]
+          ],
+          "target": "bench3"
         }
       ],
       "retreatCost": 1,
@@ -2388,19 +2404,27 @@
       "abilities": [
         {
           "name": "Water Shuriken",
-          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Active)"
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Active)",
+          "position": "any",
+          "target": "active"
         },
         {
           "name": "Water Shuriken",
-          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 1)"
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 1)",
+          "position": "any",
+          "target": "bench1"
         },
         {
           "name": "Water Shuriken",
-          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 2)"
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 2)",
+          "position": "any",
+          "target": "bench2"
         },
         {
           "name": "Water Shuriken",
-          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 3)"
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 3)",
+          "position": "any",
+          "target": "bench3"
         }
       ],
       "evolvesFrom": "Frogadier",
@@ -2837,11 +2861,12 @@
       "attacks": [
         {
           "name": "Thunder Spear",
-          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon. (Active)",
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon.",
           "damage": "",
           "cost": [
             "Lightning"
-          ]
+          ],
+          "target": "active"
         },
         {
           "name": "Thunder Spear",
@@ -2849,7 +2874,8 @@
           "damage": "",
           "cost": [
             "Lightning"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Thunder Spear",
@@ -2857,7 +2883,8 @@
           "damage": "",
           "cost": [
             "Lightning"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Thunder Spear",
@@ -2865,7 +2892,8 @@
           "damage": "",
           "cost": [
             "Lightning"
-          ]
+          ],
+          "target": "bench3"
         }
       ],
       "retreatCost": 1,
@@ -3089,7 +3117,8 @@
           "damage": "",
           "cost": [
             "Colorless"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Teleport",
@@ -3097,7 +3126,8 @@
           "damage": "",
           "cost": [
             "Colorless"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Teleport",
@@ -3105,7 +3135,8 @@
           "damage": "",
           "cost": [
             "Colorless"
-          ]
+          ],
+          "target": "bench3"
         }
       ],
       "retreatCost": 1,
@@ -4121,7 +4152,8 @@
           "damage": "",
           "cost": [
             "Fighting"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Stretch Kick",
@@ -4129,7 +4161,8 @@
           "damage": "",
           "cost": [
             "Fighting"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Stretch Kick",
@@ -4137,7 +4170,8 @@
           "damage": "",
           "cost": [
             "Fighting"
-          ]
+          ],
+          "target": "bench3"
         }
       ],
       "retreatCost": 1,
@@ -4434,23 +4468,7 @@
       "attacks": [
         {
           "name": "Call for Family",
-          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 1)",
-          "damage": "",
-          "cost": [
-            "Darkness"
-          ]
-        },
-        {
-          "name": "Call for Family",
-          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 2)",
-          "damage": "",
-          "cost": [
-            "Darkness"
-          ]
-        },
-        {
-          "name": "Call for Family",
-          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 3)",
+          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench.",
           "damage": "",
           "cost": [
             "Darkness"
@@ -6785,7 +6803,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Inferno Dance",
@@ -6793,7 +6812,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Inferno Dance",
@@ -6801,7 +6821,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench3"
         },
         {
           "name": "Heat Blast",
@@ -7374,7 +7395,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench1"
         },
         {
           "name": "Inferno Dance",
@@ -7382,7 +7404,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench2"
         },
         {
           "name": "Inferno Dance",
@@ -7390,7 +7413,8 @@
           "damage": "",
           "cost": [
             "Fire"
-          ]
+          ],
+          "target": "bench3"
         },
         {
           "name": "Heat Blast",
