@@ -1,6 +1,4 @@
 from cards.pokemon import Pokemon
-from cards.card import Card
-from typing import List
 
 
 class GameRules:

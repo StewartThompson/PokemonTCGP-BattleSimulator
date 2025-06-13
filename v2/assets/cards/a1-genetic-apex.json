@@ -517,7 +517,15 @@
       "abilities": [
         {
           "name": "Fragrance Trap",
-          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot."
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 1)"
+        },
+        {
+          "name": "Fragrance Trap",
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 2)"
+        },
+        {
+          "name": "Fragrance Trap",
+          "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 3)"
         }
       ],
       "evolvesFrom": "Weepinbell",
@@ -758,7 +766,25 @@
       "attacks": [
         {
           "name": "Leaf Supply",
-          "effect": "Take a Grass Energy from your Energy Zone and attach it to 1 of your Benched Grass Pokémon.",
+          "effect": "Take a Grass Energy from your Energy Zone and attach it to 1 of your Benched Grass Pokémon. (Bench 1)",
+          "damage": "50",
+          "cost": [
+            "Grass",
+            "Grass"
+          ]
+        },
+        {
+          "name": "Leaf Supply",
+          "effect": "Take a Grass Energy from your Energy Zone and attach it to 1 of your Benched Grass Pokémon. (Bench 2)",
+          "damage": "50",
+          "cost": [
+            "Grass",
+            "Grass"
+          ]
+        },
+        {
+          "name": "Leaf Supply",
+          "effect": "Take a Grass Energy from your Energy Zone and attach it to 1 of your Benched Grass Pokémon. (Bench 3)",
           "damage": "50",
           "cost": [
             "Grass",
@@ -1208,7 +1234,23 @@
       "attacks": [
         {
           "name": "Inferno Dance",
-          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like.",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like (Bench 3)",
           "damage": "",
           "cost": [
             "Fire"
@@ -1840,7 +1882,36 @@
       "attacks": [
         {
           "name": "Water Arrow",
-          "effect": "This attack does 50 damage to 1 of your opponent's Pokémon.",
+          "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Active)",
+          "damage": "",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ]
+        },
+        {
+          "name": "Water Arrow",
+          "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ]
+        },
+        {
+          "name": "Water Arrow",
+          "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ]
+        },        {
+          "name": "Water Arrow",
+          "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Water",
@@ -2317,7 +2388,19 @@
       "abilities": [
         {
           "name": "Water Shuriken",
-          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon."
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Active)"
+        },
+        {
+          "name": "Water Shuriken",
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 1)"
+        },
+        {
+          "name": "Water Shuriken",
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 2)"
+        },
+        {
+          "name": "Water Shuriken",
+          "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 3)"
         }
       ],
       "evolvesFrom": "Frogadier",
@@ -2754,7 +2837,31 @@
       "attacks": [
         {
           "name": "Thunder Spear",
-          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon.",
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon. (Active)",
+          "damage": "",
+          "cost": [
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Lightning"
+          ]
+        },
+        {
+          "name": "Thunder Spear",
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Lightning"
@@ -2978,7 +3085,23 @@
       "attacks": [
         {
           "name": "Teleport",
-          "effect": "Switch this Pokémon with 1 of your Benched Pokémon.",
+          "effect": "Switch this Pokémon with 1 of your Benched Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Teleport",
+          "effect": "Switch this Pokémon with 1 of your Benched Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Teleport",
+          "effect": "Switch this Pokémon with 1 of your Benched Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Colorless"
@@ -3994,7 +4117,23 @@
       "attacks": [
         {
           "name": "Stretch Kick",
-          "effect": "This attack does 30 damage to 1 of your opponent's Benched Pokémon.",
+          "effect": "This attack does 30 damage to 1 of your opponent's Benched Pokémon. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Fighting"
+          ]
+        },
+        {
+          "name": "Stretch Kick",
+          "effect": "This attack does 30 damage to 1 of your opponent's Benched Pokémon. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Fighting"
+          ]
+        },
+        {
+          "name": "Stretch Kick",
+          "effect": "This attack does 30 damage to 1 of your opponent's Benched Pokémon. (Bench 3)",
           "damage": "",
           "cost": [
             "Fighting"
@@ -4295,7 +4434,23 @@
       "attacks": [
         {
           "name": "Call for Family",
-          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench.",
+          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Darkness"
+          ]
+        },
+        {
+          "name": "Call for Family",
+          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Darkness"
+          ]
+        },
+        {
+          "name": "Call for Family",
+          "effect": "Put 1 random Nidoran♂ from your deck onto your Bench. (Bench 3)",
           "damage": "",
           "cost": [
             "Darkness"
@@ -5570,7 +5725,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [ 
+        {
+          "name" : "Item",
+          "effect" : "Play this card as if it were a 40-HP Basic Colorless Pokemon. At any time during your turn, you may discard this card from play. This card can't retreat. (Active)",
+          "position" : "hand",
+          "target" : "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Common"
     },
@@ -5586,7 +5748,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name" : "Item",
+          "effect" : "Play this card as if it were a 40-HP Basic Colorless Pokemon. At any time during your turn, you may discard this card from play. This card can't retreat. (Active)",
+          "position" : "hand",
+          "target" : "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Common"
     },
@@ -5602,7 +5771,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name" : "Item",
+          "effect" : "Play this card as if it were a 40-HP Basic Colorless Pokemon. At any time during your turn, you may discard this card from play. This card can't retreat. (Active)",
+          "position" : "hand",
+          "target" : "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Common"
     },
@@ -5618,7 +5794,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon.",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon.",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon.",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon.",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5634,7 +5835,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 1)",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 2)",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 3)",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5650,7 +5876,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "During this turn, attacks used by your Ninetales, Rapidash, or Magmar do +30 damage to your opponent's Active Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5663,7 +5896,14 @@
       "health": null,
       "set": "Genetic Apex (A1)",
       "pack": "Mewtwo",
-      "attacks": [],
+      "attacks": [
+        {
+          "name": "Supporter",
+          "effect": "Put your Muk or Weezing in the Active Spot into your hand. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "retreatCost": null,
       "weakness": null,
       "abilities": [],
@@ -5682,7 +5922,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "During this turn, attacks used by your Pokemon do +10 damage to your opponent's Active Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5698,7 +5945,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Active)",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 1)",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 2)",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 3)",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5714,7 +5986,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Switch out your opponent’s Active Pokemon to the Bench. (Your opponent chooses the new Active Pokemon.) (Active)",
+          "position": "hand",
+          "target": "oppActive"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -5730,7 +6009,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Move all Electric Energy from your Benched Pokemon to your Raichu, Electrode, or Electabuzz in the Active Spot. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Uncommon"
     },
@@ -6495,7 +6781,23 @@
       "attacks": [
         {
           "name": "Inferno Dance",
-          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like.",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 3)",
           "damage": "",
           "cost": [
             "Fire"
@@ -6830,7 +7132,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon. (Bench 1)",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon. (Bench 2)",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Heal 50 damage from 1 of your Grass Pokemon. (Bench 3)",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6846,7 +7173,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 1)",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 2)",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Choose 1 of your Water Pokemon, and flip a coin until you get tails. For each heads, take a Water Energy from your Energy Zone and attach it to that Pokemon. (Bench 3)",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6862,7 +7214,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "During this turn, attacks used by your Ninetales, Rapidash, or Magmar do +30 damage to your opponent's Active Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6878,7 +7237,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Put your Muk or Weezing in the Active Spot into your hand. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6891,7 +7257,14 @@
       "health": null,
       "set": "Genetic Apex (A1)",
       "pack": "Mewtwo",
-      "attacks": [],
+      "attacks": [
+        {
+          "name": "Supporter",
+          "effect": "During this turn, attacks used by your Pokemon do +10 damage to your opponent's Active Pokemon. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "retreatCost": null,
       "weakness": null,
       "abilities": [],
@@ -6910,7 +7283,32 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Active)",
+          "position": "hand",
+          "target": "active"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 1)",
+          "position": "hand",
+          "target": "bench1"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 2)",
+          "position": "hand",
+          "target": "bench2"
+        },
+        {
+          "name": "Supporter",
+          "effect": "Take a Fighting Energy from your Energy Zone and attach it to Golem or Onix. (Bench 3)",
+          "position": "hand",
+          "target": "bench3"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6926,7 +7324,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Switch out your opponent’s Active Pokemon to the Bench. (Your opponent chooses the new Active Pokemon.) (Active)",
+          "position": "hand",
+          "target": "oppActive"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6942,7 +7347,14 @@
       "attacks": [],
       "retreatCost": null,
       "weakness": null,
-      "abilities": [],
+      "abilities": [
+        {
+          "name": "Supporter",
+          "effect": "Move all Electric Energy from your Benched Pokemon to your Raichu, Electrode, or Electabuzz in the Active Spot. (Active)",
+          "position": "hand",
+          "target": "active"
+        }
+      ],
       "evolvesFrom": null,
       "rarity": "Full Art EX/Support"
     },
@@ -6958,7 +7370,23 @@
       "attacks": [
         {
           "name": "Inferno Dance",
-          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like.",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 1)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 2)",
+          "damage": "",
+          "cost": [
+            "Fire"
+          ]
+        },
+        {
+          "name": "Inferno Dance",
+          "effect": "Flip 3 coins. Take an amount of Fire Energy from your Energy Zone equal to the number of heads and attach it to your Benched Fire Pokémon in any way you like. (Bench 3)",
           "damage": "",
           "cost": [
             "Fire"

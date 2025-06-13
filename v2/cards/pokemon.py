@@ -47,6 +47,10 @@ class Pokemon(Card):
     def get_evolves_to_ids(self):
         """Get list of Pokemon IDs this can evolve to"""
         return self.evolves_to_ids.copy()
+    
+    def get_hp(self):
+        """Get the current HP of the Pokemon"""
+        return self.max_hp - self.damage_taken
 
     def __str__(self):
         return f"{self.name} ({self.element} - {self.max_hp} HP)"

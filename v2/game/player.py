@@ -1,4 +1,4 @@
-from agents.agent import Agent
+from v2.agents.random_agent import RandomAgent
 
 import random
 from agents import random_agent
