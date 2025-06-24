@@ -1,0 +1,245 @@
+[
+    {
+      "id": "a1-001",
+      "name": "Bulbasaur",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Basic",
+      "health": 70,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Vine Whip",
+          "damage": "40",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 1,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": null,
+      "rarity": "Common",
+            "image_url": "https://img.game8.co/3998332/91c4f79b2b3b4206205bf69db8dd3d1e.png/show"
+    },
+    {
+      "id": "a1-002",
+      "name": "Ivysaur",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 1",
+      "health": 90,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Razor Leaf",
+          "damage": "60",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 2,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": "Bulbasaur",
+      "rarity": "Uncommon",
+      "image_url": "https://img.game8.co/4006820/34e0ae3e3a08bf4586263f804fd42d06.png/show"
+    },
+    {
+      "id": "a1-004",
+      "name": "Venusaur ex",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 2",
+      "health": 190,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Razor Leaf",
+          "damage": "60",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ]
+        },
+        {
+          "name": "Giant Bloom",
+          "effect": "Heal 30 damage from this Pokémon.",
+          "damage": "100",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 3,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": "Ivysaur",
+      "rarity": "Rare EX"
+    },
+    {
+      "id": "a1-005",
+      "name": "Caterpie",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Basic",
+      "health": 50,
+      "set": "Genetic Apex (A1)",
+      "pack": "Pikachu",
+      "attacks": [
+        {
+          "name": "Find a Friend",
+          "effect": "Put 1 random Grass Pokémon from your deck into your hand.",
+          "damage": "",
+          "cost": [
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 1,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": null,
+      "rarity": "Common"
+    },
+    {
+      "id": "a1-006",
+      "name": "Metapod",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 1",
+      "health": 80,
+      "set": "Genetic Apex (A1)",
+      "pack": "Pikachu",
+      "attacks": [
+        {
+          "name": "Bug Bite",
+          "damage": "30",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 2,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": "Caterpie",
+      "rarity": "Common"
+    },
+    {
+      "id": "a1-007",
+      "name": "Butterfree",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 2",
+      "health": 120,
+      "set": "Genetic Apex (A1)",
+      "pack": "Pikachu",
+      "attacks": [
+        {
+          "name": "Gust",
+          "damage": "60",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ]
+        }
+      ],
+      "retreatCost": 1,
+      "weakness": "Fire",
+      "abilities": [
+        {
+          "name": "Powder Heal",
+          "effect": "Once during your turn, you may heal 20 damage from each of your Pokémon."
+        }
+      ],
+      "evolvesFrom": "Metapod",
+      "rarity": "Rare"
+    },
+    {
+      "id": "a1-008",
+      "name": "Weedle",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Basic",
+      "health": 50,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Sting",
+          "damage": "20",
+          "cost": [
+            "Grass"
+          ]
+        }
+      ],
+      "retreatCost": 1,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": null,
+      "rarity": "Common"
+    },
+    {
+      "id": "a1-009",
+      "name": "Kakuna",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 1",
+      "health": 80,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Bug Bite",
+          "damage": "30",
+          "cost": [
+            "Grass"
+          ]
+        }
+      ],
+      "retreatCost": 2,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": "Weedle",
+      "rarity": "Common"
+    },
+    {
+      "id": "a1-010",
+      "name": "Beedrill",
+      "element": "Grass",
+      "type": "Pokemon",
+      "subtype": "Stage 2",
+      "health": 120,
+      "set": "Genetic Apex (A1)",
+      "pack": "Mewtwo",
+      "attacks": [
+        {
+          "name": "Sharp Sting",
+          "damage": "70",
+          "cost": [
+            "Grass"
+          ]
+        }
+      ],
+      "retreatCost": 1,
+      "weakness": "Fire",
+      "abilities": [],
+      "evolvesFrom": "Kakuna",
+      "rarity": "Rare"
+    }
+  ]

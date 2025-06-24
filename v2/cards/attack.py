@@ -9,3 +9,11 @@ class Attack:
 
     def __str__(self):
         return f"{self.name} ({self.damage} damage) ({self.cost})"
+    
+    def has_enough_energy_for_attack(self, player):
+        for energy_type, cost_amount in self.cost.items():
+            if player.equipped_energies[energy_type.lower()] < cost_amount:
+                return False
+        return True
+    
+    

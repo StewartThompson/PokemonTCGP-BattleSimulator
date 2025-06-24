@@ -45,7 +45,6 @@ class BattleEngine:
         self.turn = 0
         self.phase = GamePhase.SETUP
         self.winner = None
-        self.turn_actions = 0
         self.state = [0] * STATE_SIZE
     
     def log(self, message: str):
@@ -64,9 +63,9 @@ class BattleEngine:
         """Main battle execution"""
         try:
             self._setup_game()
-            for player in self.players:
-                self._turn_zero(player)
-
+            self._turn_zero(self.players[0], self.players[1])
+            self._turn_zero(self.players[1], self.players[0])
+            
             while not self._is_game_over():
                 self._execute_turn()
             return self._determine_winner()
@@ -99,7 +98,6 @@ class BattleEngine:
     def _execute_turn(self):
         """Execute a complete turn"""
         self.turn += 1
-        self.turn_actions = 0
         current = self.current_player
         
         self.log(f"Turn {self.turn} - {current.name}")
@@ -110,31 +108,36 @@ class BattleEngine:
         self._main_phase(current)
         self._end_turn()
 
-    def _turn_zero(self, player: Player):
+    def _turn_zero(self, player: Player, opponent: Player):
         # Get State
-        state = self._get_state(player)
+        state = self._get_state(player, opponent)
         # Get Actions
-        actions = self._get_actions(state)
+        actions = player._get_turn_zero_actions()
 
         # Play Action
-        """Handle turn zero"""
-        basic_pokemon = player.get_basic_pokemon()
-        active = basic_pokemon[0]
-        player.play_card_to_location(active, "active")
-        self.log(f"{player.name} sets {active.name} as active")
+        player.agent.play_action(actions)
+
     
     def _create_empty_state(self) -> List[float]:
         """Create an empty state array initialized with zeros"""
         return [0.0] * STATE_SIZE
     
     # This is a function that gets the state for the human player or for the AI
-    def _get_state(self, player: Player) -> Dict[str, Any]:
+    def _get_state(self, player: Player, opponent: Player) -> Dict[str, Any]:
         # If the player is human, get the state from the human player
         if player.agent.is_human:
-            return player._get_human_state()
+            #return player._get_human_state()
+            return []
         # If the player is AI, get the state from the AI
         else:
-            return self.get_ai_state(player)
+            return self.get_ai_state(player, opponent)
+        
+    def _get_actions(self, player: Player) -> List[str]:
+        """Get all possible actions for the player"""
+
+        # Get the actions from the player
+        opponent_pokemon_locations = self._get_opponent_pokemon_locations(player, self.opponent)
+        return player._get_actions(opponent_pokemon_locations)
 
     def _start_turn_effects(self, player: Player):
         """Handle start-of-turn effects"""
@@ -209,6 +212,19 @@ class BattleEngine:
         """Get the state for the human player"""
         # This will be the GUI state that the human player sees
         return
+    
+    def _get_opponent_pokemon_locations(self, player: Player, opponent: Player) -> int:
+        """Get the location of the opponent's active pokemon"""
+        pokemon_locations = [0] * 3
+        if opponent.active_pokemon:
+            pokemon_locations[0] = 1
+        if opponent.bench_pokemons[0]:
+            pokemon_locations[1] = 1
+        if opponent.bench_pokemons[1]:
+            pokemon_locations[2] = 1
+        if opponent.bench_pokemons[2]:
+            pokemon_locations[3] = 1
+        return pokemon_locations
 
 
     def get_ai_state(self, player: Player, opponent: Player) -> List[float]:
@@ -347,16 +363,16 @@ class BattleEngine:
         # Card Count
         self.state[p_card_count] = len(player.cards_in_hand)
 
-        self.state[p_hand_card_id_0] = player.cards_in_hand[0].id if player.cards_in_hand[0] else 0
-        self.state[p_hand_card_id_1] = player.cards_in_hand[1].id if player.cards_in_hand[1] else 0
-        self.state[p_hand_card_id_2] = player.cards_in_hand[2].id if player.cards_in_hand[2] else 0
-        self.state[p_hand_card_id_3] = player.cards_in_hand[3].id if player.cards_in_hand[3] else 0
-        self.state[p_hand_card_id_4] = player.cards_in_hand[4].id if player.cards_in_hand[4] else 0
-        self.state[p_hand_card_id_5] = player.cards_in_hand[5].id if player.cards_in_hand[5] else 0
-        self.state[p_hand_card_id_6] = player.cards_in_hand[6].id if player.cards_in_hand[6] else 0
-        self.state[p_hand_card_id_7] = player.cards_in_hand[7].id if player.cards_in_hand[7] else 0
-        self.state[p_hand_card_id_8] = player.cards_in_hand[8].id if player.cards_in_hand[8] else 0
-        self.state[p_hand_card_id_9] = player.cards_in_hand[9].id if player.cards_in_hand[9] else 0
+        self.state[p_hand_card_id_0] = player.cards_in_hand[0].id if len(player.cards_in_hand) > 0 else 0
+        self.state[p_hand_card_id_1] = player.cards_in_hand[1].id if len(player.cards_in_hand) > 1 else 0
+        self.state[p_hand_card_id_2] = player.cards_in_hand[2].id if len(player.cards_in_hand) > 2 else 0
+        self.state[p_hand_card_id_3] = player.cards_in_hand[3].id if len(player.cards_in_hand) > 3 else 0
+        self.state[p_hand_card_id_4] = player.cards_in_hand[4].id if len(player.cards_in_hand) > 4 else 0
+        self.state[p_hand_card_id_5] = player.cards_in_hand[5].id if len(player.cards_in_hand) > 5 else 0
+        self.state[p_hand_card_id_6] = player.cards_in_hand[6].id if len(player.cards_in_hand) > 6 else 0
+        self.state[p_hand_card_id_7] = player.cards_in_hand[7].id if len(player.cards_in_hand) > 7 else 0
+        self.state[p_hand_card_id_8] = player.cards_in_hand[8].id if len(player.cards_in_hand) > 8 else 0
+        self.state[p_hand_card_id_9] = player.cards_in_hand[9].id if len(player.cards_in_hand) > 9 else 0
 
         # Take cards in deck and determine a probability for each one to be drawn next
         self.state[p_deck_card_id_0] = player.deck[0].id if len(player.deck) > 0 else 0
@@ -504,26 +520,26 @@ class BattleEngine:
         self.state[ob3_pokemon_energy_normal] = opponent.bench_pokemons[2].equipped_energies['normal'] if opponent.bench_pokemons and len(opponent.bench_pokemons) > 2 and opponent.bench_pokemons[2] else 0
         
         # Opponent Original Cards
-        self.state[o_original_card_id_0] = opponent.original_deck[0].id
-        self.state[o_original_card_id_1] = opponent.original_deck[1].id
-        self.state[o_original_card_id_2] = opponent.original_deck[2].id
-        self.state[o_original_card_id_3] = opponent.original_deck[3].id
-        self.state[o_original_card_id_4] = opponent.original_deck[4].id
-        self.state[o_original_card_id_5] = opponent.original_deck[5].id
-        self.state[o_original_card_id_6] = opponent.original_deck[6].id
-        self.state[o_original_card_id_7] = opponent.original_deck[7].id
-        self.state[o_original_card_id_8] = opponent.original_deck[8].id
-        self.state[o_original_card_id_9] = opponent.original_deck[9].id
-        self.state[o_original_card_id_10] = opponent.original_deck[10].id
-        self.state[o_original_card_id_11] = opponent.original_deck[11].id
-        self.state[o_original_card_id_12] = opponent.original_deck[12].id
-        self.state[o_original_card_id_13] = opponent.original_deck[13].id
-        self.state[o_original_card_id_14] = opponent.original_deck[14].id
-        self.state[o_original_card_id_15] = opponent.original_deck[15].id
-        self.state[o_original_card_id_16] = opponent.original_deck[16].id
-        self.state[o_original_card_id_17] = opponent.original_deck[17].id
-        self.state[o_original_card_id_18] = opponent.original_deck[18].id
-        self.state[o_original_card_id_19] = opponent.original_deck[19].id
+        self.state[o_original_card_id_0] = opponent._original_deck[0].id
+        self.state[o_original_card_id_1] = opponent._original_deck[1].id
+        self.state[o_original_card_id_2] = opponent._original_deck[2].id
+        self.state[o_original_card_id_3] = opponent._original_deck[3].id
+        self.state[o_original_card_id_4] = opponent._original_deck[4].id
+        self.state[o_original_card_id_5] = opponent._original_deck[5].id
+        self.state[o_original_card_id_6] = opponent._original_deck[6].id
+        self.state[o_original_card_id_7] = opponent._original_deck[7].id
+        self.state[o_original_card_id_8] = opponent._original_deck[8].id
+        self.state[o_original_card_id_9] = opponent._original_deck[9].id
+        self.state[o_original_card_id_10] = opponent._original_deck[10].id
+        self.state[o_original_card_id_11] = opponent._original_deck[11].id
+        self.state[o_original_card_id_12] = opponent._original_deck[12].id
+        self.state[o_original_card_id_13] = opponent._original_deck[13].id
+        self.state[o_original_card_id_14] = opponent._original_deck[14].id
+        self.state[o_original_card_id_15] = opponent._original_deck[15].id
+        self.state[o_original_card_id_16] = opponent._original_deck[16].id
+        self.state[o_original_card_id_17] = opponent._original_deck[17].id
+        self.state[o_original_card_id_18] = opponent._original_deck[18].id
+        self.state[o_original_card_id_19] = opponent._original_deck[19].id
 
         self.state[o_discard_pile_card_id_0] = opponent.discard_pile[0].id if opponent.discard_pile and len(opponent.discard_pile) > 0 else 0
         self.state[o_discard_pile_card_id_1] = opponent.discard_pile[1].id if opponent.discard_pile and len(opponent.discard_pile) > 1 else 0
@@ -556,6 +572,6 @@ class BattleEngine:
         self.state[o_next_turn_energy_type_available_to_attach] = ENERGY_TYPES[opponent.energy_zone[1]] if opponent.energy_zone else 0
         self.state[p_score] = player.points
         self.state[o_score] = opponent.points
-        self.state[turn_number] = self.turn_number
+        self.state[turn_number] = self.turn
         
-        return self._get_state(player)
+        return self.state

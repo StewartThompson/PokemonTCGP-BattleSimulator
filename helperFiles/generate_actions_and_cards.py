@@ -31,6 +31,7 @@ import logging
 import sys
 from pathlib import Path
 from typing import Dict, List
+import re
 
 sys.path.append(str(Path(__file__).parent.parent))
 from v2.game.ids.action_id_generation import ActionIdGenerator
@@ -40,27 +41,92 @@ from v2.game.ids.action_id_generation import ActionIdGenerator
 # ---------------------------------------------------------------------------
 
 def load_existing_mapping(py_path: Path, var_name: str) -> Dict[str, int]:
-    """Load existing ID mapping from a Python file, if it exists."""
+    """Load existing ID mapping from a Python file."""
     if not py_path.exists():
         return {}
 
-    spec = importlib.util.spec_from_file_location("existing", py_path)
-    if not spec or not spec.loader:
-        return {}
-
+    # Create a new module
+    spec = importlib.util.spec_from_file_location("temp_module", py_path)
     module = importlib.util.module_from_spec(spec)
-    sys.modules["existing"] = module
-    spec.loader.exec_module(module)
-    return getattr(module, var_name, {})  # type: ignore[return-value]
+
+    # Create a dictionary to store the mapping
+    mapping = {}
+
+    # Read the file line by line
+    with open(py_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                # Extract variable name and value
+                var_name, value = line.split("=", 1)
+                var_name = var_name.strip()
+                value = value.strip()
+                
+                # Skip class definition and docstring
+                if var_name.startswith("class") or value.startswith('"""'):
+                    continue
+                
+                # Convert variable name back to original format
+                # Example: a1_001_attack_bulbasaur_vineWhip_pActive_oActive -> a1-001_attack_bulbasaur_vineWhip_pActive_oActive
+                parts = var_name.split("_")
+                if len(parts) > 1 and re.match(r"[a-zA-Z]\d+", parts[0]) and parts[1].isdigit():
+                    # This is a card ID, convert back to original format
+                    original_key = f"{parts[0]}-{parts[1]}_" + "_".join(parts[2:])
+                else:
+                    original_key = var_name
+                
+                try:
+                    value = int(value)
+                    mapping[original_key] = value
+                except ValueError:
+                    continue
+
+    return mapping
 
 # ---------------------------------------------------------------------------
 # mapping builders
 # ---------------------------------------------------------------------------
 
+def convert_to_variable_name(key: str) -> str:
+    """Convert a key to a valid Python variable name."""
+    # For card IDs like "a1-001", convert to "a1_001"
+    parts = key.split("_")
+    if len(parts) > 0:
+        # Handle card ID part (first part) specially
+        card_id = parts[0]
+        # Extract the set prefix (e.g. "a1") and number (e.g. "001") separately
+        match = re.match(r"([a-zA-Z]\d+)-(\d+)", card_id)
+        if match:
+            set_prefix, number = match.groups()
+            card_id = f"{set_prefix}_{number}"
+        else:
+            card_id = card_id.replace("-", "_")
+        
+        # Combine with rest of the parts
+        var_name = card_id + "_" + "_".join(parts[1:])
+    else:
+        var_name = key.replace("-", "_")
+        
+    # Remove any remaining invalid characters
+    var_name = "".join(c for c in var_name if c.isalnum() or c == "_")
+    return var_name
+
 def build_actions_mapping(cards: List[dict], existing: Dict[str, int]) -> Dict[str, int]:
     """Build mapping of action IDs to sequential integers."""
-    mapping = existing.copy()
-    next_id = max(mapping.values()) + 1 if mapping else 0
+    mapping = {
+        "end_turn": 0,
+        "pactive_attach_energy": 1,
+        "pbench1_attach_energy": 2,
+        "pbench2_attach_energy": 3,
+        "pbench3_attach_energy": 4
+    }
+    next_id = 5
+
+    # Add existing mappings that aren't default actions
+    for key, value in existing.items():
+        if key not in mapping:
+            mapping[key] = value
+            next_id = max(next_id, value + 1)
 
     def add(key: str):
         nonlocal next_id
@@ -72,7 +138,7 @@ def build_actions_mapping(cards: List[dict], existing: Dict[str, int]) -> Dict[s
     for card in sorted(cards, key=lambda c: c["id"]):
         try:
             # Add play basic pokemon IDs
-            for action_id in ActionIdGenerator.get_all_action_ids(card):
+            for action_id in ActionIdGenerator.get_all_action_ids_for_card(card):
                 add(action_id)
         except Exception as e:
             logging.error(f"⚠️ Error processing card {card.get('name', card.get('id', 'Unknown'))}: {str(e)}")
@@ -99,21 +165,37 @@ def build_card_mapping(cards: List[dict], existing: Dict[str, int]) -> Dict[str,
 # ---------------------------------------------------------------------------
 
 def write_mapping(mapping: Dict[str, int], py_path: Path, var_name: str):
-    """Write ID mapping to a Python file."""
+    """Write ID mapping to a Python file as a class with class variables."""
     content = [
-        "from typing import Dict",
-        "",
         "# Auto-generated by helperFiles/generate_actions_and_cards.py",
         "# DO NOT EDIT MANUALLY.",
         "",
-        f"{var_name}: Dict[str, int] = {{",
+        f"class {var_name}:",
+        '    """Class containing all action IDs as class variables."""',
+        "",
     ]
 
-    # Write entries in sorted order for deterministic output
-    for key in sorted(mapping.keys()):
-        content.append(f"    {key!r}: {mapping[key]},")
+    # Add default actions first
+    if var_name == "ACTION_IDS":
+        content.extend([
+            "    end_turn = 0",
+            "    a_attach_energy = 1",
+            "    b1_attach_energy = 2",
+            "    b2_attach_energy = 3",
+            "    b3_attach_energy = 4",
+            ""
+        ])
 
-    content.extend(["}", ""])
+    # Write entries in sorted order for deterministic output
+    for key, value in sorted(mapping.items(), key=lambda x: x[1]):  # Sort by value to maintain ID order
+        if key in ["end_turn", "a_attach_energy", "b1_attach_energy", "b2_attach_energy", "b3_attach_energy"]:
+            continue
+            
+        # Convert the string key format to a valid Python variable name
+        var_name = convert_to_variable_name(key)
+        content.append(f"    {var_name} = {value}")
+
+    content.extend(["", ""])
 
     py_path.write_text("\n".join(content))
     logging.info(f"[OK] Wrote {len(mapping)} entries -> {py_path}")

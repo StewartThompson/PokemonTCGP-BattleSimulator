@@ -11,3 +11,10 @@ class Tool(Card):
 
     def __str__(self):
         return f"{self.name}"
+
+    def _get_actions(self, player, opponent_pokemon_locations):
+        """Get all possible actions for the Tool"""
+
+        available_actions = []
+
+        return available_actions

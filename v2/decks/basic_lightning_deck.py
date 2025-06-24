@@ -8,45 +8,45 @@ class BasicLightningDeck(BaseDeck):
         
         # Build deck with electric Pokemon
         deck = [
-           # Voltorb x2
-            self.get_card_by_id('a1-099'),
-            self.get_card_by_id('a1-099'),
+             # Erika x2
+            self.get_card_by_id('a1-219'),
+            self.get_card_by_id('a1-219'),
 
-            # Electrode x2
-            self.get_card_by_id('a1-100'),
-            self.get_card_by_id('a1-100'),
-
-            # Tynamo x2
-            self.get_card_by_id('a1-107'),
-            self.get_card_by_id('a1-107'),
-
-            # Eelektrik x2
-            self.get_card_by_id('a1-108'),
-            self.get_card_by_id('a1-108'),
-
-            # Eelektross x2
-            self.get_card_by_id('a1-109'),
-            self.get_card_by_id('a1-109'),
-
-            # Magnemite x2
-            self.get_card_by_id('a2-051'),
-            self.get_card_by_id('a2-051'),
-
-            # Magneton x2
-            self.get_card_by_id('a2-052'),
-            self.get_card_by_id('a2-052'),
-
-            # Potion x2
-            self.get_card_by_id('pa-001'),
-            self.get_card_by_id('pa-001'),
-
-            # Pokeball x2
-            self.get_card_by_id('pa-005'),
-            self.get_card_by_id('pa-005'),
+            # Bulbasaur x2
+            self.get_card_by_id('a1-001'),
+            self.get_card_by_id('a1-001'),
             
-            # Professor's Research x2
-            self.get_card_by_id('pa-007'),
-            self.get_card_by_id('pa-007'),
+            # Ivysaur x2
+            self.get_card_by_id('a1-002'),
+            self.get_card_by_id('a1-002'),
+
+            # Venusaur ex x1
+            self.get_card_by_id('a1-004'),
+            self.get_card_by_id('a1-004'),
+            
+            # Weedle x2
+            self.get_card_by_id('a1-008'),
+            self.get_card_by_id('a1-008'),
+            
+            # Kakuna x2
+            self.get_card_by_id('a1-009'),
+            self.get_card_by_id('a1-009'),
+            
+            # Giovanni x2
+            self.get_card_by_id('a1-223'),
+            self.get_card_by_id('a1-223'),
+            
+            # Sabrina x2
+            self.get_card_by_id('a1-225'),
+            self.get_card_by_id('a1-225'),
+            
+            # Paras x2
+            self.get_card_by_id('a1-014'),
+            self.get_card_by_id('a1-014'),
+            
+            # Parasect x2
+            self.get_card_by_id('a1-015'),
+            self.get_card_by_id('a1-015'),
         ]
         
         # Remove any None values (in case some cards weren't found)
@@ -61,3 +61,6 @@ class BasicLightningDeck(BaseDeck):
             "type": "Electric",
             "strategy": "Fast electric deck with lightning Pokemon"
         } 
+    def get_type(self):
+        """Returns the type of the deck"""
+        return ["Lightning"]

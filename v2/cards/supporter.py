@@ -7,10 +7,21 @@ class Supporter(Card):
         super().__init__(id, name, type, subtype, set, pack, rarity, action_ids)
 
         # If abilities exist, set the first one as the main ability
-        if abilities:
-            self.ability = abilities[0]
+        self.abilities = abilities
 
     def __str__(self):
         return f"{self.name}"
+    
+    def _get_actions(self, player, opponent_pokemon_locations):
+        """Get all possible actions for the Supporter"""
+
+        available_actions = []
+
+        if self.card_position == Card.Position.HAND:
+            available_actions.extend(self.action_ids)
+
+        return available_actions
+        
+        
 
 

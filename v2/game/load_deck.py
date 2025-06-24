@@ -44,7 +44,7 @@ class DeckLoader:
                 
             # Create instance and get the deck
             deck_instance = deck_class()
-            return deck_instance.get_deck()
+            return deck_instance.get_deck(), deck_instance.get_type()
             
         except Exception as e:
             print(f"Error loading deck {deck_name}: {e}")

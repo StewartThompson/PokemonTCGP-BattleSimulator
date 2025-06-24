@@ -518,19 +518,19 @@
         {
           "name": "Fragrance Trap",
           "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 1)",
-          "position": "pBench1",
-          "target": "pActive"
+          "position": "pActive",
+          "target": "oBench1"
         },
         {
           "name": "Fragrance Trap",
           "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 2)",
-          "position": "pBench2",
-          "target": "pActive"
+          "position": "pActive",
+          "target": "oBench2"
         },
         {
           "name": "Fragrance Trap B3",
           "effect": "If this Pokémon is in the Active Spot, once during your turn, you may switch in 1 of your opponent's Benched Basic Pokémon to the Active Spot. (Bench 3)",
-          "position": "pBench3",
+          "position": "oBench3",
           "target": "pActive"
         }
       ],
@@ -1901,7 +1901,7 @@
             "Water",
             "Water"
           ],
-          "target": "pActive"
+          "target": "oActive"
         },
         {
           "name": "Water Arrow",
@@ -1912,7 +1912,7 @@
             "Water",
             "Water"
           ],
-          "target": "pBench1"
+          "target": "oBench1"
         },
         {
           "name": "Water Arrow",
@@ -1923,7 +1923,7 @@
             "Water",
             "Water"
           ],
-          "target": "pBench2"
+          "target": "oBench2"
         },        {
           "name": "Water Arrow",
           "effect": "This attack does 50 damage to 1 of your opponent's Pokémon. (Bench 3)",
@@ -1933,7 +1933,7 @@
             "Water",
             "Water"
           ],
-          "target": "pBench3"
+          "target": "oBench3"
         }
       ],
       "retreatCost": 1,
@@ -2406,25 +2406,25 @@
           "name": "Water Shuriken",
           "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Active)",
           "position": "any",
-          "target": "pActive"
+          "target": "oActive"
         },
         {
           "name": "Water Shuriken",
           "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 1)",
           "position": "any",
-          "target": "pBench1"
+          "target": "oBench1"
         },
         {
           "name": "Water Shuriken",
           "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 2)",
           "position": "any",
-          "target": "pBench2"
+          "target": "oBench2"
         },
         {
           "name": "Water Shuriken",
           "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon. (Bench 3)",
           "position": "any",
-          "target": "pBench3"
+          "target": "oBench3"
         }
       ],
       "evolvesFrom": "Frogadier",
@@ -2866,7 +2866,7 @@
           "cost": [
             "Lightning"
           ],
-          "target": "pActive"
+          "target": "oActive"
         },
         {
           "name": "Thunder Spear",
@@ -2875,7 +2875,7 @@
           "cost": [
             "Lightning"
           ],
-          "target": "pBench1"
+          "target": "oBench1"
         },
         {
           "name": "Thunder Spear",
@@ -2884,7 +2884,7 @@
           "cost": [
             "Lightning"
           ],
-          "target": "pBench2"
+          "target": "oBench2"
         },
         {
           "name": "Thunder Spear",
@@ -2893,7 +2893,7 @@
           "cost": [
             "Lightning"
           ],
-          "target": "pBench3"
+          "target": "oBench3"
         }
       ],
       "retreatCost": 1,
@@ -4153,7 +4153,7 @@
           "cost": [
             "Fighting"
           ],
-          "target": "pBench1"
+          "target": "oBench1"
         },
         {
           "name": "Stretch Kick",
@@ -4162,7 +4162,7 @@
           "cost": [
             "Fighting"
           ],
-          "target": "pBench2"
+          "target": "oBench2"
         },
         {
           "name": "Stretch Kick",
@@ -4171,7 +4171,7 @@
           "cost": [
             "Fighting"
           ],
-          "target": "pBench3"
+          "target": "oBench3"
         }
       ],
       "retreatCost": 1,

@@ -2,6 +2,8 @@ from .card import Card
 from .tool import Tool
 from .attack import Attack
 from .ability import Ability
+from game.ids.action_id_generation import ActionIdGenerator
+from game.ids.stages import STAGES
 class Pokemon(Card):
     def __init__(self, id, name, element, type, subtype, stage, health, set, pack, attacks, retreat_cost, weakness, abilities, evolves_from, rarity, action_ids):
         # Call the parent Card constructor
@@ -57,5 +59,57 @@ class Pokemon(Card):
 
     def __str__(self):
         return f"{self.name} ({self.element} - {self.max_hp} HP)"
+    
+    def _get_actions(self, player, opponent_pokemon_locations):
+        """Get all possible actions for the Pokemon"""
 
+        available_actions = []
+        
+        for action_id in self.action_ids:
+            if '_action_retreat_' in action_id:
+                if self.can_retreat and sum(self.equipped_energies.values()) >= self.retreat_cost:
+                    available_actions.append(action_id)
+                
+            elif '_action_evolve_' in action_id:
+                if self._can_evolve_pokemeon(player):
+                    available_actions.append(action_id)
 
+            elif '_action_attack_' in action_id:
+                for attack in self.attacks:
+                    if attack.has_enough_energy_for_attack(player) and self.card_position == Card.Position.ACTIVE:
+                        if 'oactive' in action_id and opponent_pokemon_locations[0] == 1:
+                            available_actions.append(action_id)
+                        elif 'obench1' in action_id and opponent_pokemon_locations[1] == 1:
+                            available_actions.append(action_id)
+                        elif 'obench2' in action_id and opponent_pokemon_locations[2] == 1:
+                            available_actions.append(action_id)
+                        elif 'obench3' in action_id and opponent_pokemon_locations[3] == 1:
+                            available_actions.append(action_id)
+                
+            elif '_action_ability_' in action_id:
+                continue
+
+            elif '_play_' in action_id:
+                if self.stage == 'basic' and self.card_position == Card.Position.HAND:
+                    if 'pactive' in action_id and player.active_pokemon is None:
+                        available_actions.append(action_id)
+                    elif player.bench_pokemons[0] is None:
+                        available_actions.append(action_id)
+                    elif player.bench_pokemons[1] is None:
+                        available_actions.append(action_id)
+                    elif player.bench_pokemons[2] is None:
+                        available_actions.append(action_id)
+            
+
+        # available_actions.extend(self._get_attack_action_ids())
+        # available_actions.extend(self._get_ability_action_ids())
+
+        return available_actions
+    
+    def _can_evolve_pokemeon(self, player):
+        """Get the evolve action ids for the Pokemon"""
+        for card in [player.active_pokemon] + player.bench_pokemons:
+            if isinstance(card, Pokemon) and card.id in self.get_evolves_from_ids() and card.placed_or_evolved_this_turn == 0:
+                return True
+        return False
+        

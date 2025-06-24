@@ -185,7 +185,7 @@ class JsonCardImporter:
         stage = subtype.lower().replace(' ', '')
 
         action_ids = []
-        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+        for action_id in ActionIdGenerator.get_all_action_ids_for_card(card_data):
             action_ids.append(action_id)
         
         pokemon = Pokemon(
@@ -221,7 +221,7 @@ class JsonCardImporter:
             abilities.append(ability)
 
         action_ids = []
-        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+        for action_id in ActionIdGenerator.get_all_action_ids_for_card(card_data):
             action_ids.append(action_id)
         
         item = Supporter(
@@ -250,7 +250,7 @@ class JsonCardImporter:
             abilities.append(ability)
         
         action_ids = []
-        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+        for action_id in ActionIdGenerator.get_all_action_ids_for_card(card_data):
             action_ids.append(action_id)
         
         item = Tool(
@@ -279,7 +279,7 @@ class JsonCardImporter:
             abilities.append(ability)
 
         action_ids = []
-        for action_id in ActionIdGenerator.get_all_action_ids(card_data):
+        for action_id in ActionIdGenerator.get_all_action_ids_for_card(card_data):
             action_ids.append(action_id)
         
         item = Item(

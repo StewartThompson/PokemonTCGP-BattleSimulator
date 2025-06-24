@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "v2.game.match",
             "args": [
-                "--deck1", "randomAgent", "basic_lightning_deck",
+                "--deck1", "human", "basic_lightning_deck",
                 "--deck2", "human", "basic_grass_deck",
                 "--simulations", "3",
                 "--debug"
