@@ -4,6 +4,7 @@ from .attack import Attack
 from .ability import Ability
 from .energy import Energy
 
+
 class Pokemon(Card):
 
     class PokemonType:
