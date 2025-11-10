@@ -5,11 +5,11 @@ import random
 import sys
 import os
 from .battle_engine import BattleEngine
-from .load_deck import DeckLoader
+# from .load_deck import DeckLoader  # Remove load_deck import for now (we'll create it later if needed)
 from .player import Player
-from v2.agents.human_agent import HumanAgent
-from v2.agents.random_agent import RandomAgent
-from cards.pokemon import Pokemon
+from v3.models.agents.human_agent import HumanAgent
+from v3.models.agents.random_agent import RandomAgent
+from v3.models.cards.pokemon import Pokemon
 
 class Match:
     """Simple match class that takes two Player objects"""
@@ -52,9 +52,12 @@ def main():
     agent2_name, deck2_name = args.deck2
 
     # Load decks
-    deck_loader = DeckLoader()
-    deck1, deck1_type = deck_loader.load_deck_by_name(deck1_name)
-    deck2, deck2_type = deck_loader.load_deck_by_name(deck2_name)
+    # deck_loader = DeckLoader()  # Commented out for now - decks must be created manually
+    # deck1, deck1_type = deck_loader.load_deck_by_name(deck1_name)
+    # deck2, deck2_type = deck_loader.load_deck_by_name(deck2_name)
+    # For now, decks must be created manually
+    print("Deck loading not yet implemented - please create decks manually")
+    return
     
     if not deck1:
         print(f"Deck '{deck1_name}' not found")

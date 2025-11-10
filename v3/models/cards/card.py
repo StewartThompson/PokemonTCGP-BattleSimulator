@@ -1,5 +1,7 @@
 # This is the superclass for all cards
-from .ability import Ability
+from typing import TYPE_CHECKING, Optional
+if TYPE_CHECKING:
+    from .ability import Ability
 
 class Card:
 
@@ -23,7 +25,7 @@ class Card:
         ACTIVE = "ACTIVE"
         DISCARD = "DISCARD"
 
-    def __init__(self, id: str, name: str, type: Type, subtype: Subtype, set: str, pack: str, rarity: str, image_url: str = None, ability: Ability = None):
+    def __init__(self, id: str, name: str, type: Type, subtype: Subtype, set: str, pack: str, rarity: str, image_url: str = None, ability: Optional['Ability'] = None):
         self.id: str = id
         self.name: str = name
         self.type: Card.Type = type

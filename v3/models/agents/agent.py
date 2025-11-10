@@ -1,9 +1,9 @@
 import random
 from typing import List, Dict, Optional
-import numpy as np
-from gymnasium import Env, spaces
-from stable_baselines3 import PPO
-from stable_baselines3.common.env_checker import check_env
+# import numpy as np  # Not needed for base Agent
+# from gymnasium import Env, spaces  # Not needed for base Agent
+# from stable_baselines3 import PPO  # Not needed for base Agent
+# from stable_baselines3.common.env_checker import check_env  # Not needed for base Agent
 
 # Agent Base Class
 class Agent:

@@ -1,10 +1,10 @@
 import random
 from typing import List, Dict, Optional
-import numpy as np
-from gymnasium import Env, spaces
-from stable_baselines3 import PPO
-from stable_baselines3.common.env_checker import check_env
-from agents.agent import Agent
+# import numpy as np  # Not needed for basic bot agent
+# from gymnasium import Env, spaces  # Not needed for basic bot agent
+# from stable_baselines3 import PPO  # Not needed for basic bot agent
+# from stable_baselines3.common.env_checker import check_env  # Not needed for basic bot agent
+from v3.models.agents.agent import Agent
 
 # RL Agent with Built-in Training
 class RLAgent(Agent):

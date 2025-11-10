@@ -1,388 +1,307 @@
-# PokemonTCGP-BattleSimulator
+# Pokemon TCG Pocket Battle Simulator
 
-A Python-based Pokémon TCG Pocket Battle Simulator designed for running automated battle simulations. This tool is ideal for developing and testing AI/bot strategies, analyzing deck performance, and exploring game mechanics with cards from the original TCG extension and promo sets.
-
-## Table of Contents
-
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Database](#database)
-  - [Overview](#overview)
-  - [File Descriptions](#file-descriptions)
-    - [`abilities.csv`](#abilitiescsv)
-    - [`attacks.csv`](#attackscsv)
-    - [`items.csv`](#itemscsv)
-    - [`pokemons.csv`](#pokemonscsv)
-    - [`trainers.csv`](#trainerscsv)
-- [How It Works](#how-it-works)
-  - [Game Engine (`moteur/`)](#game-engine-moteur)
-  - [Database Loading (`utils.py`)](#database-loading-utilspy)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Running a Simulation](#running-a-simulation)
-  - [Customizing Simulations](#customizing-simulations)
-- [Extending the Simulator](#extending-the-simulator)
-  - [Adding New Cards](#adding-new-cards)
-  - [Modifying Game Logic](#modifying-game-logic)
-  - [Developing AI/Bots](#developing-aibots)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-- [Code Refactoring](#code-refactoring)
-- [Decks](#decks)
-  - [Creating Custom Decks](#creating-custom-decks)
+A complete Python implementation of the Pokemon TCG Pocket battle system, featuring automated battle simulations, human play, and AI agent support.
 
 ## Features
 
-*   **Turn-based Battle Simulation:** Emulates core Pokémon TCG Pocket battle mechanics.
-*   **CSV-Powered Database:** Easily view and manage card data for Pokémon, attacks, abilities, items, and trainers.
-*   **Initial Card Set:** Includes cards primarily from the first TCG extension and associated promo cards.
-*   **Extensible:** Designed to allow for the addition of new cards and modification of game rules.
-*   **AI/Bot Development Platform:** Provides a framework for creating and testing automated player strategies.
-*   **Deck Testing:** Facilitates experimentation with different deck builds and strategies.
+- ✅ **Complete Battle Engine**: Full turn-based gameplay with all phases (Draw, Main, Attack, End)
+- ✅ **Card System**: JSON-powered card database with support for Pokemon, Items, Supporters, and Tools
+- ✅ **Effect System**: Comprehensive effect parser supporting healing, energy, search, coin flips, and more
+- ✅ **Evolution System**: Complete evolution mechanics (Basic → Stage 1 → Stage 2)
+- ✅ **Status Effects**: Asleep, Poisoned, Burned, Paralyzed, Confused
+- ✅ **Energy Zone**: Automatic energy generation system
+- ✅ **Multiple Agents**: Random AI, Human player, and extensible bot framework
+- ✅ **Pre-built Decks**: Ready-to-use deck configurations
+- ✅ **Comprehensive Testing**: 40+ tests covering all game mechanics
+
+## Quick Start
+
+### Play from Terminal
+
+```bash
+# Quick simulation (two random AI players)
+python3 play_game.py
+
+# Play as human (interactive)
+python3 play_game.py --player1 human
+
+# Watch with debug output
+python3 play_game.py --debug
+
+# Use pre-built decks
+python3 play_game.py --deck1_type grass --deck2_type fire
+
+# Run multiple simulations
+python3 play_game.py --simulations 10
+```
+
+### Command Line Options
+
+- `--player1 {human,random}` - Player 1 type (default: random)
+- `--player2 {human,random}` - Player 2 type (default: random)
+- `--simulations N` - Number of games to simulate (default: 1)
+- `--debug` - Show detailed game actions and board state
+- `--deck1_type {grass,fire,intermediate_grass}` - Pre-built deck for Player 1
+- `--deck2_type {grass,fire,intermediate_grass}` - Pre-built deck for Player 2
+- `deck1 deck2` - Specify deck names as positional arguments
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd PokemonTCGP-BattleSimulator
+   ```
+
+2. **Python 3.7+ required** (no external dependencies needed for basic functionality)
+
+3. **Run the game:**
+   ```bash
+   python3 play_game.py
+   ```
 
 ## Project Structure
 
 ```
 PokemonTCGP-BattleSimulator/
-├── main.py                 # Main script to run simulations
-├── utils.py                # Utility functions, including database loading
-├── assets/
-│   └── database/
-│       ├── abilities.csv
-│       ├── attacks.csv
-│       ├── items.csv
-│       ├── pokemons.csv
-│       └── trainers.csv
-└── moteur/
-    ├── match.py            # Main game module that imports other components
-    ├── player.py           # Player class, manages player state
-    ├── core/
-    │   ├── __init__.py
-    │   ├── match.py        # Core game logic and match orchestration
-    │   ├── turn_state.py   # Manages state for a single turn
-    │   └── player_extensions.py # Extensions for the Player class
-    ├── handlers/
-    │   ├── __init__.py
-    │   └── card_effect_handler.py # Handles effects for abilities, attacks, etc.
-    ├── cartes/
-    │   ├── item.py
-    │   ├── pokemon.py
-    │   ├── tool.py         # (Note: Tool cards are defined but not yet in CSVs/gameplay)
-    │   └── trainer.py
-    └── combat/
-        ├── ability.py
-        └── attack.py
+├── v3/                          # Current version (v3)
+│   ├── models/
+│   │   ├── cards/               # Card models (Pokemon, Trainer, etc.)
+│   │   ├── agents/              # AI agents (Random, Human, Bot)
+│   │   └── match/               # Battle engine and game logic
+│   │       ├── actions/         # Game actions (Attack, Evolve, etc.)
+│   │       ├── effects/          # Card effects (Heal, Energy, etc.)
+│   │       └── status_effects/   # Status conditions
+│   ├── importers/               # Card data loaders
+│   ├── assets/                  # JSON card database
+│   └── decks/                   # Pre-built deck configurations
+├── play_game.py                 # Main entry point
+└── tests/                       # Comprehensive test suite
 ```
 
-## Database
+## Game Rules Summary
 
-### Overview
+### Deck Construction
+- **Deck Size**: Exactly 20 cards
+- **Card Limits**: Maximum 2 copies of the same card
+- **Basic Pokemon**: Deck must contain at least 1 Basic Pokemon
 
-The simulator's card data is stored in CSV files located in the `assets/database/` directory. This data is loaded at runtime by `utils.py`. The `effect type` / `attack effect` and `special values` columns are crucial as they drive the game logic in `moteur/match.py`.
+### Turn Structure
+1. **Draw Phase**: Draw 1 card
+2. **Main Phase**: Play Pokemon, attach energy, use trainers, evolve, retreat
+3. **Attack Phase**: Attack with active Pokemon
+4. **End Phase**: Apply status effects, reset flags, generate energy
 
-### File Descriptions
+### Energy System
+- **Automatic Generation**: 1 energy per turn from Energy Zone
+- **Attachment Limit**: 1 energy per turn
+- **Energy Persistence**: Energy is NOT discarded after attacks
+- **Colorless Energy**: Can be satisfied by any energy type
 
-#### `abilities.csv`
-Stores Pokémon abilities.
-*   `ID`: Unique identifier.
-*   `Name`: Ability name.
-*   `Description`: Text description.
-*   `amount`: How often it can be used (e.g., "once" per turn).
-*   `effect type`: A keyword string that `match.py` uses to determine the ability's logic (e.g., `heal_all`, `switch_active`).
-*   `special values`: Pipe-separated values that provide parameters for the `effect type` (e.g., `20` for `heal_all`, `enemy|self` for `switch_active`).
+### Evolution
+- **Requirement**: Pokemon must be in play 1 turn before evolving
+- **Limit**: 1 evolution per Pokemon per turn (multiple Pokemon can evolve)
+- **Restriction**: Neither player can evolve on Turn 1
 
-#### `attacks.csv`
-Stores Pokémon attacks.
-*   `ID`: Unique identifier.
-*   `Name`: Attack name.
-*   `Description`: Text description.
-*   `damage`: Base damage of the attack.
-*   `energy cost`: Pipe-separated string defining energy requirements (e.g., `water:2|normal:1`).
-*   `attack effect`: Keyword string for the attack's additional effect (e.g., `discard_opponent_energy`, `self_heal`).
-*   `special values`: Pipe-separated parameters for the `attack effect`.
+### Victory Conditions
+- **Prize Victory**: Collect 3 prize points (by knocking out Pokemon)
+- **No Active Pokemon**: Opponent has no Pokemon to promote
+- **Turn Limit**: Game ends in draw after 100 turns
 
-#### `items.csv`
-Stores Item cards.
-*   `ID`: Unique identifier.
-*   `Name`: Item name.
-*   `Description`: Text description.
-*   `effect_type`: Keyword string for the item's effect.
-*   `special values`: Pipe-separated parameters for the `effect_type`.
+For complete rules, see the [Game Rules](#game-rules) section below.
 
-#### `pokemons.csv`
-Stores Pokémon card data.
-*   `ID`: Unique identifier.
-*   `Name`: Pokémon name.
-*   `Stage`: Evolution stage (e.g., `basic`, `stage1`, `stage2_ex`).
-*   `Attacks IDs`: Pipe-separated list of attack IDs this Pokémon can use.
-*   `hp`: Maximum Hit Points.
-*   `pre-evo name`: Name of the Pokémon it evolves from.
-*   `evo name`: Pipe-separated list of Pokémon it can evolve into.
-*   `retreat cost`: Number of energy cards to discard for retreating.
-*   `type`: Pokémon's energy type (e.g., `grass`, `fire`).
-*   `weakness`: Energy type this Pokémon is weak to.
-*   `Ability ID`: ID of the ability this Pokémon has, if any.
+## Usage Examples
 
-#### `trainers.csv`
-Stores Trainer (Supporter) cards.
-*   `ID`: Unique identifier.
-*   `Name`: Trainer name.
-*   `Description`: Text description.
-*   `effect_type`: Keyword string for the trainer's effect.
-*   `special values`: Pipe-separated parameters for the `effect_type`.
+### Basic Simulation
 
-## How It Works
+```python
+from v3.models.match.match import Match
+from v3.decks.basic_grass_deck import BasicGrassDeck
+from v3.models.agents.random_agent import RandomAgent
 
-### Game Engine (`moteur/`)
+# Create decks
+deck1 = BasicGrassDeck().get_deck()
+deck2 = BasicGrassDeck().get_deck()
 
-The core game logic resides in the `moteur/` directory:
+# Create players
+player1 = Player("Player 1", deck1, ["Grass"], RandomAgent)
+player2 = Player("Player 2", deck2, ["Grass"], RandomAgent)
 
-*   **`match.py`**: This is the heart of the simulator. The `Match` class orchestrates the entire game flow, from setup (drawing initial hands, placing active/benched Pokémon) to turn-by-turn actions (drawing, playing cards, attaching energy, attacking, checking win conditions). It interprets the `effect type` and `special values` from the database to execute card effects.
-    *   **Decision Making**: Currently, `match.py` uses `get_chosen_card()` and `get_action()` which prompt for user input via `input()`. This is the primary point for integrating AI or bot logic.
-*   **`player.py`**: The `Player` class manages all aspects of a player's state, including their deck, hand, discard pile, active Pokémon, benched Pokémon, prize points, and energy pile.
-*   **`cartes/`**: This sub-directory contains classes for each card type (`Pokemon`, `Item`, `Trainer`, `Tool`). These classes primarily act as data containers for card attributes loaded from the CSVs.
-*   **`combat/`**: Contains classes for `Attack` and `Ability`, which also primarily store data loaded from the CSVs.
+# Run match
+match = Match(player1, player2)
+winner = match.start_battle()
+print(f"Winner: {winner.name}")
+```
 
-### Database Loading (`utils.py`)
+### Human Play
 
-The `utils.py` script is responsible for:
-1.  Reading the CSV files from `assets/database/`.
-2.  Parsing the data, including specialized parsing for `energy cost` and pipe-separated `special values`.
-3.  Instantiating `Pokemon`, `Attack`, `Ability`, `Item`, and `Trainer` objects.
-4.  Storing these objects in global dictionaries (e.g., `all_pokemons`, `all_attacks`) for easy access by the game engine.
-The `load_default_database()` function must be called before a match can start.
+```python
+from v3.models.agents.human_agent import HumanAgent
 
-## Installation
+player1 = Player("You", deck1, ["Grass"], HumanAgent)
+player2 = Player("AI", deck2, ["Grass"], RandomAgent)
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/PokemonTCGP-BattleSimulator.git
-    cd PokemonTCGP-BattleSimulator
-    ```
-2.  **Ensure Python is installed:** Python 3.7+ is recommended.
-3.  **Install dependencies:** The project uses `pandas` for reading CSV files.
-    ```bash
-    pip install pandas
-    ```
+match = Match(player1, player2, debug=True)
+match.start_battle()
+```
 
-## Usage
+## Card Database
 
-### Running a Simulation
-
-The `main.py` script provides an example of how to set up and run a simulation:
-
-1.  **Define Decks:** Decks are Python lists of card objects. `main.py` shows examples like `pikachu_deck` and `sandlash_deck`. You'll need to use card objects fetched from the `utils.all_pokemons`, `utils.all_items`, etc., dictionaries.
-    ```python
-    # In main.py
-    import utils
-    utils.load_default_database() # Crucial: Load data first
-    from moteur import match, player
-
-    # Example deck definition
-    pikachu_deck = [
-        utils.all_pokemons[96], utils.all_pokemons[104], # ... and so on
-        utils.all_items[1], utils.all_items[1],         # ...
-        utils.all_trainers[9], utils.all_trainers[9]    # ...
-    ]
-    ```
-2.  **Create Player Instances:**
-    ```python
-    j1 = player.Player("j1")
-    j2 = player.Player("j2")
-    j1.set_deck(pikachu_deck)
-    j2.set_deck(sandlash_deck) # Replace with another deck
-    ```
-3.  **Start the Match:**
-    ```python
-    m = match.Match(j1, j2)
-    result = m.start_battle()
-    print(f"Winner: {result.name if result else 'Draw'}")
-    ```
-4.  **Run the script:**
-    ```bash
-    python main.py
-    ```
-    During the simulation, you will be prompted to make decisions for each player via the console (due to the `input()` calls in `match.py`).
-
-### Customizing Simulations
-
-*   **Decks:** Modify the deck lists in `main.py` to test different card combinations. Ensure each deck has at least one Basic Pokémon.
-*   **Number of Simulations:** Wrap the match setup and `start_battle()` call in a loop in `main.py` to run multiple simulations and gather statistics.
-*   **Automated Decisions:** To run simulations without manual input, you'll need to modify `get_chosen_card()` and `get_action()` in `moteur/match.py` (see [Developing AI/Bots](#developing-aibots)).
-
-## Extending the Simulator
+Cards are stored in JSON format in `v3/assets/`. The current implementation includes cards from the Genetic Apex (A1) set.
 
 ### Adding New Cards
 
-1.  **Identify Card Details:** Gather all necessary information for the new card (HP, attacks, ability, effects, etc.).
-2.  **Update CSVs:**
-    *   Add a new row to the relevant CSV file(s) (`pokemons.csv`, `attacks.csv`, `abilities.csv`, `items.csv`, `trainers.csv`).
-    *   Ensure `ID`s are unique.
-    *   For `effect type` / `attack effect` and `special values`:
-        *   If the effect is similar to an existing one, reuse the `effect type` and adjust `special values`.
-        *   If it's a new type of effect, you'll need to define a new `effect type` keyword and implement its logic in `moteur/match.py`.
-3.  **Implement New Effects (if needed):** If you introduced a new `effect type`, add corresponding `elif` blocks in `moteur/match.py` within the card playing or attack handling sections to implement its logic.
+1. Edit `v3/assets/a1-genetic-apex.json` (or create a new JSON file)
+2. Add card data following the existing format
+3. Cards are automatically loaded when the game starts
 
-### Modifying Game Logic
+### Card Format Example
 
-*   **Core Rules:** Changes to fundamental game rules (e.g., prize card count, hand size limits, turn phases) would primarily be made in `moteur/match.py`.
-*   **Effect Implementation:** To alter how existing effects are resolved, modify the corresponding logic blocks in `moteur/match.py` that handle specific `effect type` or `attack effect` keywords.
-
-### Developing AI/Bots
-
-This simulator is well-suited for creating AI players. The key is to replace the manual `input()` calls in `moteur/match.py`:
-
-1.  **Locate Decision Points:**
-    *   `get_chosen_card(cards, who_choose="player")`
-    *   `get_action(action_list, action_type=None)`
-2.  **Modify for Programmatic Choice:** Instead of `input()`, your AI logic would analyze the `cards` or `action_list` and the current game state (accessible via `current_player` and `opponent` objects within `Match`) to return a choice.
-    ```python
-    # Example modification in moteur/match.py (conceptual)
-
-    # def get_action(action_list, action_type=None, player_ai=None):
-    #     if player_ai:
-    #         return player_ai.choose_action(action_list, action_type, current_game_state)
-    #     else:
-    #         print("action_type", action_type)
-    #         print("Choose Action Options :")
-    #         for i, e in enumerate(action_list):
-    #             print(f"{i}: {e}")
-    #         return action_list[int(input("Choose an action by index: "))]
-    ```
-3.  **AI State Access:** Your AI will need access to the game state. This can be passed to your AI's decision-making functions. The `Match` object holds references to both `Player` objects, which in turn contain information about their hand, active/bench Pokémon, etc.
-4.  **Example AI Structure (Separate File):**
-    ```python
-    # ai_player.py (new file)
-    import random
-
-    class SimpleAI:
-        def __init__(self, player_object_in_match):
-            self.player = player_object_in_match # Reference to the AI's player object
-
-        def choose_card(self, available_cards, game_state):
-            # Simple AI: pick a random card
-            if not available_cards: return None
-            return random.choice(available_cards)
-
-        def choose_action(self, available_actions, action_type, game_state):
-            # Simple AI: pick a random action
-            if not available_actions: return None
-            # Prioritize attacking if possible, otherwise random
-            attack_actions = [a for a in available_actions if isinstance(a, str) and a.startswith("attack_")]
-            if action_type == "precise_action" and attack_actions:
-                return random.choice(attack_actions)
-            if "end_turn" in available_actions and len(available_actions) > 1 and action_type == "turn_action":
-                # Avoid ending turn immediately if other options exist
-                options = [a for a in available_actions if a != "end_turn"]
-                return random.choice(options)
-            return random.choice(available_actions)
-
-    # Then, in main.py, you might instantiate AIs and pass them to the Match,
-    # or modify Match to accept AI handlers.
-    ```
-
-## Future Enhancements
-
-*   **Graphical User Interface (GUI):** For interactive play or visualization.
-*   **Expanded Card Sets:** Add data for more Pokémon TCG expansions.
-*   **Tool Cards & Stadiums:** Fully implement Tool card mechanics and Stadium cards.
-*   **Network Play:** Allow two human players to play over a network.
-
-### Note (English) :
-**English Version:**
-
-Hello there ! If you're interested in this project or any of my other projects, please read this message :
-
-I'm here to invite you to AngelFire's Stuff, my personal Discord server. Here I will share all kinds of projects I'm working on, may it be programming, statistics (I love numbers, graphs, sheets, etc.), and some writing projects (so get ready to read !). If you enjoy devlogs or just following how projects develop, you'll find plenty to explore here. You can choose which topics interest you and pick roles to receive notifications or access channels—nothing is forced upon you !
-
-Our community is bilingual, welcoming both English and French speakers. I do my best to post every important message in both languages, though sometimes there might be a slight delay. Even if my projects don't catch your interest, you're more than welcome to share your own work, get feedback, or just chat with others who share your passions, the goal is to bring together people who share the same passions !
-
-In the server, you'll find many categories like important information, general chatting, and specific categories for code, stats, and writing projects. There are also channels for introducing yourself, sharing your own projects, suggesting new ideas for the server and for me to post personal updates. It's a discord for mature and chill individuals who enjoy similar interests, in the goal of making a united and friendly community.
-
-Looking forward to seeing you there, even if it's just to take a quick look !
-
-https://discord.gg/pzd7dJS72t
-
----
-
-### Note (Français)
-Salut toi ! Si tu es intéressé par ce projet ou n'importe quel autre de mes projets, je te conseille de lire ce message :
-
-Je suis ravi de t'inviter dans AngelFire's Stuff, mon serveur Discord personnel. Ici, je partage tout type de projets sur lesquels je travaille—programmation, statistiques (j'adore les chiffres, les graphiques, les tableaux, etc.), et des projets d'écriture (alors prépare-toi à bien lire !). Si tu aimes les devlogs, ou juste suivre comment les projets évoluent, tu trouveras plein de choses à explorer ici. Tu peux choisir les sujets qui t'intéressent et sélectionner les rôles pour recevoir des notifications ou accéder à certains salons—rien n'est forcé !
-
-Cette communauté est bilingue, accueillant à la fois les anglophones et les francophones. Je fais de mon mieux pour publier les messages importants dans les deux langues, même si parfois il peut y avoir un peu de délai ou des mots laissés en anglais lorsqu'ils sont transparents. Et même si mes projets ne t'intéressent pas, tu es plus que bienvenu de partager tes propres projets, obtenir des retours ou simplement discuter avec d'autres passionnés comme toi. Le but est de rassembler des personnes ayant des intérêts similaires !
-
-Sur le serveur, tu trouveras des catégories pour des informations importantes, des discussions générales, et des catégories spécifiques pour les projets de programmation, de stats, et d'écriture. Il y a aussi des salons pour te présenter, partager tes propres projets, suggérer de nouvelles idées pour le serveur et suivre des actualités sur ma vie. C'est un discord pour des personnes chills et matures qui ont des intérêts similaires, dans le but de faire une communauté unie et conviviale.
-
-Au plaisir de te voir bientôt !
-
-https://discord.gg/pzd7dJS72t
-
-## Code Refactoring
-
-The codebase has been refactored to improve maintainability and organization:
-
-1. **Core Modules**:
-   - `moteur/core/match.py`: Main game logic
-   - `moteur/core/turn_state.py`: Tracks state within a turn
-   - `moteur/core/player_extensions.py`: Extensions for the Player class
-
-2. **Handler Modules**:
-   - `moteur/handlers/card_effect_handler.py`: Handles card effects and abilities
-
-3. **Wrapper Module**:
-   - `moteur/match.py`: A simple wrapper that imports the refactored modules
-
-This refactoring separates concerns and makes the code more maintainable while preserving the original functionality.
-
-## Decks
-
-Decks are defined in separate Python files within the `decks/` directory, making them easy to create, modify, and share. Each deck file exports:
-
-1. `get_deck()` - Returns a list of cards comprising the deck
-2. `get_description()` - Returns metadata about the deck (name, type, strategy)
-
-Example of importing and using decks:
-
-```python
-import decks
-
-# List all available decks
-available_decks = decks.load_all_decks()
-print(available_decks)  # {'pikachu_deck': {'name': 'Pikachu Deck', ...}, ...}
-
-# Get a specific deck
-pikachu_deck = decks.get_deck('pikachu_deck')
-```
-
-### Creating Custom Decks
-
-To create a new deck:
-
-1. Create a new Python file in the `decks/` directory (e.g., `decks/my_custom_deck.py`)
-2. Define the required functions:
-
-```python
-from utils import all_pokemons, all_items, all_trainers
-
-def get_deck():
-    """Returns the cards in this deck."""
-    return [
-        # Pokémon
-        all_pokemons[123], all_pokemons[123],  # Example Pokémon
-        # Items
-        all_items[1], all_items[2],
-        # Trainers
-        all_trainers[5]
-    ]
-
-def get_description():
-    """Returns a description of the deck."""
-    return {
-        "name": "My Custom Deck",
-        "type": "Fire",  # Primary energy type
-        "strategy": "Description of the deck's strategy"
+```json
+{
+  "id": "a1-001",
+  "name": "Bulbasaur",
+  "element": "Grass",
+  "type": "Pokemon",
+  "subtype": "Basic",
+  "health": 70,
+  "attacks": [
+    {
+      "name": "Vine Whip",
+      "damage": "40",
+      "cost": ["Grass", "Colorless"],
+      "effect": "Optional effect text"
     }
+  ],
+  "retreatCost": 1,
+  "weakness": "Fire"
+}
 ```
 
-Once created, your deck will be automatically available through the `decks` module and in the command line interface.
+## Effect System
+
+The simulator supports a comprehensive effect system that parses effect text and executes game actions:
+
+- **Healing**: Heal damage from Pokemon (single or all)
+- **Energy**: Attach/discard energy from Energy Zone
+- **Search**: Search deck for Pokemon and add to hand
+- **Draw**: Draw cards from deck
+- **Coin Flips**: Conditional effects based on coin flips
+- **Switch**: Switch Pokemon between active and bench
+- **Status Effects**: Apply status conditions
+- **Evolution**: Rare Candy for Basic → Stage 2 evolution
+
+All effects from `a1-genetic-apex.json` are fully implemented and tested.
+
+## Testing
+
+Run the comprehensive test suite:
+
+```bash
+# Run all tests
+python3 tests/run_all_tests.py
+
+# Run specific test
+python3 tests/test_all_effects_integration.py
+```
+
+**Test Coverage:**
+- ✅ 40+ unit and integration tests
+- ✅ All core game mechanics tested
+- ✅ Effect system fully tested
+- ✅ Edge cases covered
+
+## Game Rules
+
+### Setup Phase
+1. Each player draws 5 cards (redraw until at least 1 Basic Pokemon)
+2. Players must play at least 1 Basic Pokemon to active spot
+3. Players can play any number of Basic Pokemon to bench (up to 3)
+4. Coin toss determines first player
+
+### First Turn Restrictions
+- **First Player**: Cannot attach energy or evolve on first turn
+- **Second Player**: Can perform all normal actions (except evolution - neither player can evolve on Turn 1)
+
+### Main Phase Actions
+- **Play Pokemon**: 1 Basic Pokemon per turn (unlimited during setup)
+- **Evolve**: 1 evolution per Pokemon per turn
+- **Attach Energy**: 1 energy per turn from Energy Zone
+- **Trainer Cards**: 
+  - Items: Unlimited per turn
+  - Supporters: 1 per turn
+  - Tools: Unlimited per turn (attach to Pokemon)
+- **Use Abilities**: 1 ability per Pokemon per turn
+- **Retreat**: Once per turn (discard energy equal to retreat cost)
+
+### Attacks
+- **Energy Requirements**: Must have enough energy to pay attack cost
+- **Colorless Energy**: Can be paid with any energy type
+- **Damage Calculation**: Base damage + weakness bonus (+20) if applicable
+- **Weakness Rule**: Only applies if base damage > 0
+- **Energy Not Discarded**: Energy remains attached after attacking
+
+### Status Effects
+- **Asleep**: Cannot attack. Coin flip at end of turn to wake up (50% chance)
+- **Poisoned**: Takes 10 damage at end of each turn
+- **Burned**: Coin flip at end of turn: Heads = 20 damage, Tails = remove status
+- **Paralyzed**: Cannot attack or retreat. Removed at end of turn
+- **Confused**: Coin flip when attacking: Heads = attack normally, Tails = attack self for 30 damage
+
+Status effects are applied at the end of each turn and removed when a Pokemon evolves.
+
+### Evolution
+- **Timing**: Pokemon must be in play 1 turn before evolving
+- **Chain**: Must follow evolution chain (Basic → Stage 1 → Stage 2)
+- **Rare Candy**: Allows Basic → Stage 2 evolution (bypassing Stage 1)
+- **Status Removal**: All status effects removed when Pokemon evolves
+
+### Energy Zone
+- **Generation**: 1 energy automatically generated per turn
+- **Types**: Player specifies which energy types are available (typically matching deck Pokemon types)
+- **Attachment Only**: Energy can only be attached from Energy Zone
+- **No Hand Size Limit**: Players can have any number of cards in hand
+
+### Victory Conditions
+1. **Prize Victory**: Collect 3 prize points (1 point per regular Pokemon KO, 2 points per EX Pokemon KO)
+2. **No Active Pokemon**: Opponent has no active Pokemon and no bench to promote
+3. **Turn Limit**: Game ends in draw after 100 turns
+
+## Extending the Simulator
+
+### Creating Custom Agents
+
+```python
+from v3.models.agents.agent import Agent
+
+class MyAgent(Agent):
+    def __init__(self, player):
+        super().__init__(player)
+        self.is_human = False
+    
+    def get_action(self, state, valid_action_indices):
+        # Your AI logic here
+        return chosen_index
+```
+
+### Adding New Effects
+
+Effects are automatically parsed from text. To add new effect types:
+
+1. Create a new effect class in `v3/models/match/effects/`
+2. Implement `from_text()` class method for parsing
+3. Implement `execute()` method for execution
+4. Add to `EffectParser.EFFECT_CLASSES`
+
+## Contributing
+
+Contributions are welcome! Areas that could use work:
+- Advanced AI agents (RL, MCTS, etc.)
+- Additional card sets and expansions
+- Performance optimizations
+- GUI for interactive play
+- Network play functionality
+
+## Acknowledgments
+
+Built as a complete implementation of the Pokemon TCG Pocket battle system for simulation, testing, and AI development.

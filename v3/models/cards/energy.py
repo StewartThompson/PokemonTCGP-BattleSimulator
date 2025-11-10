@@ -38,11 +38,27 @@ class Energy:
             Energy.Type.METAL: 0
         }
         
+        # Map string names to Energy.Type values
+        energy_map = {
+            'FIRE': Energy.Type.FIRE,
+            'WATER': Energy.Type.WATER,
+            'ROCK': Energy.Type.ROCK,
+            'GRASS': Energy.Type.GRASS,
+            'NORMAL': Energy.Type.NORMAL,
+            'COLORLESS': Energy.Type.NORMAL,  # Colorless maps to Normal
+            'ELECTRIC': Energy.Type.ELECTRIC,
+            'PSYCHIC': Energy.Type.PSYCHIC,
+            'DARK': Energy.Type.DARK,
+            'DARKNESS': Energy.Type.DARK,
+            'METAL': Energy.Type.METAL,
+        }
+        
         for energy_str in energy_list:
-            try:
-                energy_type = Energy.Type[energy_str.upper()]
+            energy_upper = energy_str.upper()
+            if energy_upper in energy_map:
+                energy_type = energy_map[energy_upper]
                 cost[energy_type] += 1
-            except KeyError:
+            else:
                 raise ValueError(f"Unknown energy type: {energy_str}")
         
         return cls(cost)
